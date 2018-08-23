@@ -1,0 +1,45 @@
+<ion-view>  
+  <ion-content>
+    <div class="list card form-backgroundColor" ng-repeat = "producto in productos">
+      <div class = "row tituloCentrado">
+        <h3 class = "colorTitulo"><b>Producto seleccionado</b></h3>
+      </div>
+
+      <div class="item item-image">
+        <img ng-src="{{'http://ferreteriadv.hopto.org/' + producto.Foto}}"/>/>
+      </div>
+
+      <div class = "col col-100">
+        <h4>{{producto.Nombre}}</h4>
+        <h5>{{producto.Descripcion}}</h5>
+        <span>${{producto.Precio | number : 2}}</span>
+      </div>
+
+      <div class = "row">
+        <div class = "col col-60">
+          <input type = "number" class = "input-cantidad"
+          ng-model = "producto.cantidad"
+          placeholder=" Cantidad" 
+          onkeypress='return (event.charCode >= 48 && event.charCode <= 57)'
+          style = "width : 50%">
+          <small class="form-text text-muted label-rojo">*Limite 5</small>
+        </div>
+      </div>
+    <div class = "col col-100">
+      <button  class="button button-small button-balanced icon-left ion-android-add-circle" 
+        ng-click ="agregarCarrito($index,producto.cantidad)">
+        <b>Agregar</b>
+      </button>  
+    </div>
+
+  </div>        
+        
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+  </ion-content>
+</ion-view>  
+

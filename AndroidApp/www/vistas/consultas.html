@@ -1,0 +1,74 @@
+<ion-view>  
+  <ion-content ng-controller = "controlConsulta">
+                        <!--Usuario Loggeado-->
+    <div ng-show = "sesion">                      
+      <br>
+      <div class ="padding form-backgroundColor"  ng-show = "sesion">
+        <div class = "row tituloCentrado">
+          <h3 class = "colorTitulo"><b>Envienos su consulta</b></h3>  
+        </div>
+        <br>
+        <div class="list">
+          <label class="item item-input item-stacked-label">
+            <span class="input-label">Producto</span>
+            <label class="item-input-wrapper">
+              <input ion-autocomplete type="text" class="ion-autocomplete bar-productos"
+              readonly="readonly"  autocomplete="off" loading-icon = "spiral"
+              placeholder= "Buscar producto.." max-selected-items="1"
+              ng-model = "selectProducto" item-view-value-key="Nombre"
+              item-value-key="idProductos" selected-items-label = "Lista de seleccion" 
+              select-items-label="Elija un producto" ng-model-options="{debounce:200}"
+              cancel-label = "Cancelar" items-method="traerProductos(query)" 
+              items-clicked-method="buscarProductosPorNombre(callback)" style = "background-color: white"/>
+              <i class="icon ion-search placeholder-icon"></i>
+            </label>
+          </label>
+          <label class="item item-input item-stacked-label">
+            <span class="input-label label">Descripcion*</span>
+            <textarea type ="text"  ng-model = "descripcion">
+            </textarea sty>
+            <small class="form-text text-muted label-rojo">La consulta debe llevar una descripcion</small>
+          </label>
+          <label class="item item-input item-stacked-label">
+            <span class="input-label">Imagen</span>
+            <div>
+              <img ng-src = "{{imagen}}" alt = "Aun no se cargo ninguna imagen">    
+            </div>
+          </label>
+        </div>      
+        <div class = "row">
+          <div class = "col">
+            <button class="button button-block button-positive icon-right ion-camera" ng-click="tomarFoto()">Sacar foto</button>                
+          </div>
+          <div class = "col">
+            <button class="button button-block button-positive icon-right ion-images" ng-click="elegirImagen()">Galeria</button>                
+          </div>
+        </div>
+
+        <button class="button button-block button-balanced icon-right ion-android-send" 
+        ng-disabled = "!descripcion"
+        ng-click="enviar()">Enviar</button>    
+        
+      </div>
+     <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br> 
+    </div>  
+                          <!--Fin Usuario Loggeado-->
+
+                          <!--Usuario No Loggeado-->
+    <div ng-show= "!sesion" style = "overflow: hidden">
+      <h3 class = "text-center text-verticalCenter">
+        <p>Para enviarnos una consulta debes iniciar sesion previamente.</p>
+          <a ng-click = "cambiarEstado()">Ir a login</a>
+      </h3>  
+    </div>
+                        <!--Fin Usuario No Loggeado-->
+    
+
+  </ion-content>
+</ion-view>  
+

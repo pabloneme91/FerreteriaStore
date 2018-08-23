@@ -1,0 +1,38 @@
+<ion-modal-view>
+  <ion-header-bar class="bar bar-header bar-positive">
+    <h1 class="title text-center">Facturas Impagas</h1>
+    <button class="button button-clear button-primary" ng-click="cerrarModal()">Volver</button>
+  </ion-header-bar>
+    <ion-content>
+      <div class="row row-Tabla">
+        <div class="col col-Tabla text-center"><b>Codigo</b></div>
+        <div class="col col-Tabla text-center"><b>Fecha</b></div>
+        <div class="col col-Tabla text-center"><b>Total Factura</b></div>
+        <div class="col col-Tabla"></div>
+      </div>
+      <div class="row" ng-repeat="factura in facturas">
+        <div class="col col-Tabla text-center">{{factura.idFactura}}</div>
+        <div class="col col-Tabla text-center">{{factura.Fecha}}</div>
+        <div class="col col-Tabla text-center label-rojo">${{factura.Total | number : 2}}</div>
+        <div class="col col-Tabla text-center">
+        <button class="button ion-search iconoVerTemplate" 
+          ng-click="verDetalle(factura.idFactura,$index)"></button>
+        </div>
+      </div>
+
+      <br>
+      <div class="row">
+        <h3 class = "col label-rojo"><u>Detalle Deuda</u></h3>
+      </div>
+      <div class="row">
+        <h4 class = "col label-rojo">Saldo = ${{cliente.Saldo}}</h4>
+      </div>
+      <div class="row">
+        <h4 class = "col label-rojo">Facturas = ${{totalFacturas | number: 2}}</h4>
+      </div>
+      <div class="row">
+        <h4 class = "col label-rojo">Total = ${{totalFacturas + cliente.Saldo | number:2}}</h4>
+      </div>
+
+    </ion-content>
+</ion-modal-view>

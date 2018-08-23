@@ -1,0 +1,27 @@
+<ion-view>  
+  <ion-content>
+    <br>
+    <div class = "form-backgroundColor">
+      <div class = "row tituloCentrado">
+      <h3 class = "colorTitulo"><b>{{rubro}}</b></h3>
+      </div>
+      <div class="list">
+        <div class="item item-divider" ng-repeat = "subRubro in subRubros">
+          <a class="item" ng-click = "estadoProductosPorSubRubro(subRubro)">
+            {{subRubro.Nombre}}
+          </a>
+          <br>
+        </div>
+      </div>      
+      <br>
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+  </ion-content>
+</ion-view>  
+
+|

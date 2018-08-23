@@ -1,0 +1,92 @@
+{
+  "name": "ion-autocomplete",
+  "version": "0.4.0",
+  "description": "A configurable Ionic directive for an autocomplete dropdown",
+  "keywords": [
+    "AngularJS",
+    "angular",
+    "Ionic",
+    "ion",
+    "autocomplete"
+  ],
+  "homepage": "https://github.com/guylabs/ion-autocomplete",
+  "bugs": {
+    "url": "https://github.com/guylabs/ion-autocomplete/issues"
+  },
+  "author": {
+    "name": "Danny Povolotski",
+    "email": "dannypovolotski@gmail.com",
+    "url": "https://github.com/israelidanny"
+  },
+  "contributors": [
+    {
+      "name": "Guy Brand",
+      "email": "admin@guylabs.org",
+      "url": "http://guylabs.ch"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/guylabs/ion-autocomplete.git"
+  },
+  "devDependencies": {
+    "bower": "~1.8.0",
+    "coveralls": "~2.11.14",
+    "grunt": "~1.0.1",
+    "grunt-bower-install-simple": "~1.2.3",
+    "grunt-contrib-concat": "~1.0.1",
+    "grunt-contrib-cssmin": "~2.0.0",
+    "grunt-contrib-uglify": "~2.1.0",
+    "grunt-http-server": "~2.0.0",
+    "grunt-karma": "~2.0.0",
+    "grunt-protractor-runner": "~4.0.0",
+    "karma": "~1.5.0",
+    "karma-chrome-launcher": "~2.0.0",
+    "karma-coverage": "~1.1.1",
+    "karma-firefox-launcher": "~1.0.0",
+    "karma-jasmine": "~1.1.0",
+    "karma-ng-html2js-preprocessor": "~1.0.0",
+    "karma-phantomjs-launcher": "~1.0.2",
+    "load-grunt-tasks": "~3.5.2",
+    "time-grunt": "~1.4.0"
+  },
+  "dependencies": {},
+  "license": "MIT",
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/guylabs/ion-autocomplete/blob/master/LICENSE"
+    }
+  ],
+  "main": "dist/ion-autocomplete.js",
+  "scripts": {
+    "start": "./node_modules/protractor/bin/webdriver-manager update && ./node_modules/protractor/bin/webdriver-manager start",
+    "test": "[ -d node_modules/protractor ] && ./node_modules/protractor/bin/webdriver-manager update && grunt build"
+  },
+  "gitHead": "ae104803f10f03c40dac4d0fcf78e7e90aba4194",
+  "_id": "ion-autocomplete@0.4.0",
+  "_shasum": "730e910d1bb3f73883618313c2529c6f7592de08",
+  "_from": "ion-autocomplete@latest",
+  "_npmVersion": "4.0.5",
+  "_nodeVersion": "7.4.0",
+  "_npmUser": {
+    "name": "guylabs",
+    "email": "guy@guymas.ch"
+  },
+  "dist": {
+    "shasum": "730e910d1bb3f73883618313c2529c6f7592de08",
+    "tarball": "https://registry.npmjs.org/ion-autocomplete/-/ion-autocomplete-0.4.0.tgz"
+  },
+  "maintainers": [
+    {
+      "name": "guylabs",
+      "email": "guy@guymas.ch"
+    }
+  ],
+  "_npmOperationalInternal": {
+    "host": "packages-12-west.internal.npmjs.com",
+    "tmp": "tmp/ion-autocomplete-0.4.0.tgz_1488188698724_0.6553906504996121"
+  },
+  "directories": {},
+  "_resolved": "https://registry.npmjs.org/ion-autocomplete/-/ion-autocomplete-0.4.0.tgz"
+}

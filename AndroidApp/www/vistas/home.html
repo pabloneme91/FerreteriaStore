@@ -1,0 +1,84 @@
+<ion-view>  
+  <ion-content class="has-footer">
+    <br>
+
+    <!--Imagen de Presentacion-->
+ 
+    <div class = "col-xs-12" > 
+      <img class = "centrarImagen" src="img/Logo.jpg"
+       alt ="Error al cargar la imagen">
+    </div>
+
+    <!--Fin Imagen de Presentacion-->
+
+    <br>
+
+    <!--Categorias-->
+
+    <div class ="form-backgroundColor" >
+      <ion-scroll direction="x">
+        <div class="row">
+          <div class="col col-33 text-center" ng-repeat = "rubro in rubros">
+            <img src="img/Rubros/{{rubro.Rubro}}.jpg" class="botonCategoria"
+              ng-click = "estadoListarSubRubro(rubro)">
+            <p><b>{{rubro.Rubro}}</b></p>
+          </div>
+        </div>
+      </ion-scroll>
+    </div>
+
+    <!--Fin Categorias-->
+    <br>
+
+    <!--Ofertas-->
+    <div class = "text-center">
+        <h3 style = "color : red"><b>OFERTAS!!!</b></h3>
+    </div>
+    <div class = "row gallery" style = "background-color: #f8f8f8">
+      <div class = "col col-50 div-productoThumbnail" ng-repeat = "producto in productos">
+        <div class = "col col-100">
+          <a ng-click = "buscarProducto(producto)">
+            <img class = "centrarImagen" 
+              ng-src="{{'http://ferreteriadv.hopto.org/' + producto.Foto}}"/>
+          </a>
+        </div>
+        <div class = "col col-100 div-datosProducto">
+          <div class = "cortarString div-minHeight">
+            <h4>{{producto.Nombre}}</h4>
+          </div>
+          <div class = "cortarString">
+            <h5 style = "font-style: italic;">{{
+              producto.Descripcion}}
+            </h5>
+          </div>
+          <div class = "div-precio">
+            <span>${{producto.Precio | number : 2}}</span>
+          </div>
+        </div>
+            <div class = "col col-60">
+              <input class = "input-cantidad" type = "number" 
+              ng-model = "producto.cantidad"
+              placeholder=" Cantidad" 
+              onkeypress='return (event.charCode >= 48 && event.charCode <= 57)'>
+              <small class="form-text text-muted label-rojo">*Limite 5</small>
+            </div>
+        <div class = "col col-100">
+            <button  class="button button-small button-balanced icon-left ion-android-add-circle" 
+              ng-click ="agregarCarrito($index,producto.cantidad)">
+              <b>Agregar</b>
+            </button>  
+          </div>
+      </div>
+    </div>
+
+    <!--Fin Ofertas-->
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+  </ion-content>
+</ion-view>  
+

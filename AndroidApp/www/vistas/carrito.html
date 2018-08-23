@@ -1,0 +1,63 @@
+<ion-view>  
+  <ion-content>
+    <br>
+    <div ng-show = "sesion && lineas.length > 0" class = "form-backgroundColor">
+    <br>
+      <div  class = "row tituloCentrado">
+        <h3 class = "colorTitulo"><b>Mi Carrito</b></h3>  
+      </div>
+      <br>
+      <div class="list div-listCarrito form-backgroundColor">
+        <div ng-repeat = "linea in lineas">
+          <div class="item item-thumbnail-left item-icon-right div-thumbnailCarrito" >
+              <img class = "imagenCarrito" ng-src= "{{'http://ferreteriadv.hopto.org/' + linea.producto.Foto}}"
+                alt="Error al cargar la foto"
+                ng-click = "buscarProducto(linea)"/>
+            <h3>{{linea.producto.Nombre}}</h3>
+            <h5>{{linea.producto.Descripcion}}</h5>
+            <h4>Precio Unitario: ${{linea.producto.Precio | number :2}}</h4>
+            <h4>Cantidad: {{linea.Cantidad}}</h4>
+            <h4 class = "label-rojo">Total: ${{linea.Total | number : 2}}</h4>
+            <i class="icon ion-ios-close-empty iconoBorrarCarrito"
+              ng-click = "borrar($index)"></i>
+          </div>  
+          
+        </div>
+      </div>
+
+      <div class = "row">
+        <div class = "col">
+          <h4 class = "label-totalCarrito"><b>Total Carrito = </b></h4>
+        </div>
+        <div class = "col" style = "margin-right: 20px">
+          <label class="item item-input form-backgroundColor">
+          <i class="icon ion-social-usd icono-totalCarrito"></i>
+          <input  type="number" class = "input-productoCarrito" 
+          value = "{{datosCarrito.Total | number:2}}"
+          readonly="true">
+        </label>
+        </div>
+      </div>
+      <button class="button button-block button-balanced icon-right ion-bag" ng-click="mostrarModalConfirmacion()">Realizar Compra</button>    
+    </div>
+
+    <div ng-show = "sesion && lineas.length === 0">    
+      <h3 class = "text-center text-verticalCenter">No hay productos en el carrito</h3>
+    </div>
+
+    <div ng-show= "!sesion">
+      <h3 class = "text-center text-verticalCenter">
+        <p>Debes iniciar sesion para utilizar esta funcion.</p>
+          <a ng-click = "cambiarEstado()">Ir a login</a>
+      </h3>  
+    </div>
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+  </ion-content>
+</ion-view>  
+

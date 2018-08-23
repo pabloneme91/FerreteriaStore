@@ -1,0 +1,76 @@
+<ion-view>  
+  <ion-content>
+    <br>
+    <div class = "row tituloCentrado">
+      <h3 class = "colorTitulo"><b>Subrubro: {{rubro.nombre}}</b></h3>
+    </div>
+    <br>
+    <br>
+    <div class = "row">
+        <div class = "col col-25">
+          <label>Ordenar:</label>  
+        </div>
+        <div class = "col-30">
+          <button class="button button-small button-positive" ng-click = "ordenar(1)">
+          Mayor Precio
+          </button>
+        </div>
+        <div class = "col-30 col-offset-10">
+          <button class="button button-small button-positive" ng-click = "ordenar(0)">
+          Menor Precio
+          </button>
+        </div>
+      </div>
+
+      <div class = "row gallery" style = "background-color: #f8f8f8 ">
+        <div class = "col col-50" ng-repeat = "producto in productos">
+          <div class = "col col-100">
+          <a ng-click = "buscarProducto(producto)">
+            <img class = "centrarImagen" 
+              ng-src="{{'http://ferreteriadv.hopto.org/' + producto.Foto}}"/>
+          </a>
+          </div>
+          <div class = "col col-100 div-datosProducto">
+            <h4>{{producto.Nombre.length > 25 ? 
+              (producto.Nombre.substring(0,25) + '...') : 
+              producto.Nombre}}</h4>
+            <h5 style = "font-style: italic;">{{producto.Descripcion.length > 34 ? 
+              (producto.Descripcion.substring(0,34) + '...') : 
+              producto.Descripcion}}
+            </h5>
+            <div class = "div-precio">
+              <span>${{producto.Precio | number : 2}}</span>
+            </div>
+          </div>
+          <div class = "row">
+            <div class = "col col-60">
+              <input type = "number" class = "input-cantidad"
+                ng-model = "producto.cantidad"
+                placeholder=" Cantidad" 
+                onkeypress='return (event.charCode >= 48 && event.charCode <= 57)'>
+                <small class="form-text text-muted label-rojo">*Limite 5</small>
+            </div>
+          </div>
+          <div class = "col col-100">
+            <button  class="button button-small button-balanced icon-left ion-android-add-circle" 
+              ng-click ="agregarCarrito($index,producto.cantidad)">
+              <b>Agregar</b>
+            </button>  
+          </div>
+        </div>
+      </div>        
+      
+    <ion-infinite-scroll
+      on-infinite="cargarNuevosProductos()"
+      distance="1%">
+    </ion-infinite-scroll>
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+  </ion-content>
+</ion-view>  
+

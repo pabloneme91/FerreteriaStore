@@ -1,0 +1,108 @@
+<br>
+<br>
+<br>
+<br>
+
+
+<div class="container well" style="background-color: #e3f2fd">
+
+	<div class="row" id = "scrollTop">
+		<div class="col-xs-12">
+			<h3 class = "text-center">Empleados</h3>
+		</div>
+	</div>
+
+	<div class="separador" style="margin:15px 0px 15px 0px;border-top-color: #A4A4A4"></div>
+
+    <div class = "row">
+        <div class = "col-md-4">
+          <label>Filtrar Por:</label>
+        </div>
+    </div>
+       
+    <br>
+
+    <div class = "row">
+        <div class = "col-sm-5 col-md-5">
+            <div class = "col-xs-8 col-sm-3 col-md-2">
+              <label>Nombre</label>
+            </div>
+            <div class = "col-xs-8 col-sm-1 col-md-3">
+              <input ng-model="search.Nombre">
+            </div>
+        </div>        
+        <div class = "col-sm-5 col-md-5">
+            <div class = "col-xs-8 col-sm-4 col-md-2 margenTop">
+              <label>Estado: </label>
+            </div>
+            <div class = "col-xs-6 col-sm-6 col-md-5">
+                <select class = "form-control" ng-model = "search.Estado">
+                	<option>Activo</option>
+                	<option>Baja</option>
+                	<option value = "{{undefined}}">Todos</option>
+                </select>
+            </div>
+        </div>    
+    </div>
+
+    <br>
+
+	<div class = "table-responsive">
+
+    	<table ng-table class="table table-bordered table-hover">
+
+    		<thead>
+        		<tr>
+        			<th class = "text-center">Nombre</th>
+        			<th class = "text-center">Documento</th>
+        			<th class = "text-center">Telefono</th>
+        			<th class = "text-center">Mail</th>
+        			<th class = "text-center">Rol</th>
+        			<th class = "text-center">Estado</th>
+        			<th class = "text-center"></th>
+                    <th class = "text-center"></th>
+        		</tr>
+    		</thead>
+
+        	<tbody>
+				<tr ng-repeat="empleado in empleados | filter:search:strict">
+					<td class = "text-center">{{empleado.Nombre}}</td>
+				    <td class = "text-center">{{empleado.Documento}}</td>
+				    <td class = "text-center">{{empleado.Telefono}}</td>
+				    <td class = "text-center">{{empleado.Mail}}</td>
+				    <td class = "text-center total-label">{{elegirRol(empleado.Rol)}}</td>
+				    <td class = "text-center total-label">{{(empleado.Estado)}}</td>
+                    <td class = "text-center">
+                        <a ng-click="cambiarEstado(empleado.Estado,empleado.idEmpleados)">
+		                    <div ng-show = "empleado.Estado === 'Activo'">
+		                        <i class ="glyphicon glyphicon-arrow-down"></i>
+		                    </div>
+		                    <div ng-show = "empleado.Estado === 'Baja'">
+		                        <i class ="glyphicon glyphicon-arrow-up"></i>
+		                    </div>
+                        </a>
+                    </td>
+                    <td class = "text-center">
+                        <a ng-click="borrarEmpleado(empleado.idEmpleados)">
+                            <i class ="glyphicon glyphicon-trash"></i>               
+                        </a>
+                    </td>
+				</tr>
+    		</tbody>
+
+    	</table>
+
+    </div>
+
+	<div>
+        <alert-message class ="mensajeAlerta" alert="alertMessage" ></alert-message>
+    </div>
+
+    <div ng-show ="cargando"  class="loader">
+        <strong>{{cargando}}</strong>
+    </div>
+    
+
+</div>
+
+

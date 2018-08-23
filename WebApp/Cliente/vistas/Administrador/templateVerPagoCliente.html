@@ -1,0 +1,110 @@
+<div class="modal-header">
+    <h3 class="text-center modal-title" id="modal-title">
+        Informacion del Pago({{pagos[indexPago].Tipo === 'D' ? 'Directo' : 'Cuenta Corriente'}})
+    </h3>
+</div>
+
+<div class = "modal-body">
+    <div class = "table-responsive">    
+
+        <table ng-table class="table table-bordered table-hover">
+
+            <caption class = "text-left"><b>Facturas y/o saldo abonado</b></caption>
+            <thead>
+                <tr ng-hide = "!detallePago.detalle || detallePago.detalle.length === 0">
+                    <th class = "text-center">Codigo</th>
+                    <th class = "text-center">Fecha</th>
+                    <th class = "text-center">SubTotal Facturas/Saldo</th>  
+                    <th></th>
+                </tr>
+                <tr ng-hide = "detallePago.detalle.length > 0"></tr>
+            </thead>
+
+            <tbody>
+                <tr ng-hide = "!detallePago.detalle || detallePago.detalle.length === 0"   
+                ng-repeat="pago in detallePago.detalle">
+                    <td class = "text-center">{{pago.idFactura}}</td>
+                    <td class = "text-center">{{pago.Fecha || '-'}}</td>
+                    <td class = "text-center total-label">${{totalLineaPago(pago) | number: 2}}</td>
+                    <td class = "text-center">
+                        <a ng-hide ="(pago.idFactura === 'Saldo')" 
+                            ng-click="verFactura(pago.idFactura,$index)">
+                            <i class ="glyphicon glyphicon-search"></i>
+                        </a>
+                    </td>
+                </tr>
+                <tr ng-hide = "detallePago.detalle.length > 0">
+                    <td class = "text-center">No se cobro ninguna factura en este pago.</td>
+                </tr>
+            </tbody>
+        
+        </table>
+        
+    </div>
+
+    <div class="separador" style="margin:15px 0px 15px 0px;border-top-color: #A4A4A4"></div>
+
+    <h4 class = "text-left"><b><u>Detalle</u></b></h4>
+
+    <p>
+        <label class= "monto-label-bold">Monto Abonado = ${{pagos[indexPago].Monto | number: 2}}</label>
+    </p>
+
+    <p><u><i>Deuda Abonada</i></u></p>
+
+    <p ng-if = "pagos[indexPago].Tipo === 'CC'">
+        <label class = "total-label">Saldo Anterior = ${{pagos[indexPago].SaldoAnterior | number: 2}}</label>    
+    </p>
+
+    <p>
+        <label class = "total-label">Total Facturas = ${{detallePago.sumaTotalFacturas | number: 2}}</label>    
+    </p>
+
+    <p>
+        <label class = "total-label">Total Deuda = ${{detallePago.sumaTotalFacturas + pagos[indexPago].SaldoAnterior | number: 2}}</label>    
+    </p>
+
+    <p><u><i>Detalle abonado</i></u></p>
+
+    <p ng-if = "pagos[indexPago].Tipo === 'CC'">
+        <label class = "saldo-label">Saldo Abonado = ${{saldoAbonado(detallePago.sumaTotalFacturas) | number: 2}}</label>
+    </p>
+
+    <p>
+        <label class = "saldo-label">
+        Total Facturas Abonadas = ${{((detallePago.sumaTotalFacturas > 0) ? (pagos[indexPago].Monto - saldoAbonado(detallePago.sumaTotalFacturas) 
+        | number : 2) : (0 | number: 2))}}
+        </label>
+    </p>
+
+    <p>
+        <label class = "saldo-label">Total Abonado = ${{pagos[indexPago].Monto | number: 2}}</label>    
+    </p>
+
+    <p ng-if = "pagos[indexPago].Tipo === 'CC'"><u><i>Saldo Resultante</i></u></p>
+
+    <p ng-if = "pagos[indexPago].Tipo === 'CC'">
+        <label class = "monto-label-bold">Total Deuda - Total Abonado = ${{nuevoSaldo | number: 2}}</label>    
+    </p>
+
+    <div ng-if = "pagos[indexPago].Tipo === 'D'" class = "col-xs-12">
+        <div class="separador" style="margin:15px 0px 15px 0px;border-top-color: #A4A4A4"></div>
+        <p class = "total-label text-justify">
+            <i>
+                *Al ser un pago directo no se indica el saldo en el detalle ya que este no sufre modificaciones.  
+            </i>
+        </p>
+    </div>
+
+    <br>
+    
+</div>
+
+<div class="modal-footer">
+    
+        <button class="btn btn-warning" type="button" ng-click="cerrarModal()">Cerrar</button>
+</div>
+
+<div ng-show ="cargando"  class="loader">
+        <strong>{{cargando}}</strong>
+</div>

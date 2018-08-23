@@ -1,0 +1,59 @@
+<br>
+<br>
+<br>
+<br>
+
+
+<div class="container well" style="background-color: #e3f2fd">
+
+    <div class="row" id = "scrollTop">
+        <div class="col-xs-12">
+            <h3 class = "text-center">Ver Rubros</h3>
+        </div>
+    </div>
+
+    <div class="separador" style="margin:15px 0px 15px 0px;border-top-color: #A4A4A4"></div>
+
+	<form class ="form-horizontal">
+		<div class="form-group" >
+			<label for="formGroup" class ="col-sm-2 col-md-2">Rubros y subrubros</label>
+			<div class="col-sm-6 col-md-4">
+				<select class="form-control" ng-model ="selectRubros"  
+					ng-options = "(rubro.idRubro === null ? (rubro.Nombre + ' (Rubro)') : rubro.Nombre) for rubro in rubros"
+					ng-change = "changeRubro()">
+				</select>
+					
+			</div>			
+		</div>
+
+		<div class="form-group">
+			<label for="formGroup" class ="col-sm-2 col-md-2">Nombre de Rubro</label>
+			<div class="col-sm-6 col-md-4">
+				<input type="text" class="form-control" id="formGroup" ng-model = "auxRubro.Nombre">
+			</div>
+		</div>
+
+		<div class="form-group">
+			<div class="col-xs-6 col-sm-2 col-sm-offset-2 col-md-2">
+				<button ng-disabled = "!selectRubros || !auxRubro.Nombre" class="btn btn-success btn-lg" ng-click = "modificarRubro()">
+				<span class="glyphicon glyphicon-ok"></span>  Guardar</button>
+			</div>
+			<div class="col-sm-4 col-sm-offset-1 col-md-2 col-md-offset-0">
+				<button ng-disabled = "!selectRubros" type="button" class="btn btn-danger btn-lg" ng-click = "borrarRubro(rubros.indexOf(selectRubros))">
+				<span class="glyphicon glyphicon-trash">
+				</span>  Borrar</button>
+			</div>
+		</div>
+	</form>
+
+</div>
+
+<div>
+    <alert-message class ="mensajeAlerta" alert="alertMessage" ></alert-message>
+</div>
+
+<div ng-show ="cargando"  class="loader">
+    <strong>{{cargando}}</strong>
+</div>
+
+<br>

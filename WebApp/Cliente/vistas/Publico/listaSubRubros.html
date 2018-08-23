@@ -1,0 +1,24 @@
+<div class = "container" id = 'top'>
+
+	<div ng-if = "(rubro)">
+		<div class="row">
+			<div class="col-xs-12" id="resultado">
+				<h1 ><p class="text-primary text-center"><b>{{rubro}}</b></p></h1>
+				
+				<br>
+			</div>
+		</div>
+
+		<ul>
+			<li class = "col-xs-6 col-sm-4" ng-repeat = "subRubro in subRubros">
+				<b><a ng-click = "traerProductosPorSubRubro(subRubro)">
+					{{subRubro.Nombre}}
+				</a></b>
+			</li>
+		</ul>
+	</div>	
+	<div ng-if = "(!rubro)">
+		<h1><p class="text-primary text-center"><b>Debe elegir el rubro a buscar</b></p></h1>
+	</div>        
+
+</div>

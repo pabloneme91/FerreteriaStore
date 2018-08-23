@@ -1,0 +1,143 @@
+<br>
+<br>
+<br>
+<br>
+
+
+<div class="container well" style="background-color: #e3f2fd">
+
+    <div class="row">
+        <div class="col-xs-12">
+            <h3 class = "text-center">Pagos de Clientes</h3>
+        </div>
+    </div>
+
+    <div class="separador" style="margin:15px 0px 15px 0px;border-top-color: #A4A4A4"></div>
+
+     <form class ="form-horizontal" autocomplete="off">
+        <div class="form-group">
+            <label for="formGroup" class="col-xs-12 col-sm-1 control-label">Factura</label>
+            <div class="col-xs-8 col-sm-4">
+                <input class="form-control" type= "text" ng-model="codigo" placeholder="Codigo de la factura pagada.."
+                onkeypress='return (event.charCode >= 48 && event.charCode <= 57) || event.charCode == 46'>
+            </div>        
+            <div class="col-xs-3">
+                <button class="btn btn-primary btn-rounded btn-sm" ng-disabled = "!codigo" 
+                    ng-click = "btnTraerPagoPorFactura()">
+                    <span class="glyphicon glyphicon-search"></span>  Buscar
+                </button>    
+            </div>
+        </div>
+    </form>
+
+    <form class ="form-horizontal">
+        <div class="form-group">
+            <label for="formGroup" class="col-xs-12 col-sm-1">Cliente</label>
+            <div class="col-xs-8 col-sm-4" >
+                <select  class=" form-control" 
+                    onmousedown="if(this.options.length>5){this.size=5;}" onchange='this.size=0;' onblur="this.size=0;"  
+                    ng-model = "selectClientes" 
+                    ng-options = "cliente.Apellido + ', ' + cliente.Nombre for cliente in clientes"
+                    ng-change = "changeCliente()">
+                </select>
+            </div>
+        </div>
+    </form>	
+
+	<br>
+
+	<div class = "row" id = "scrollTabla">
+        <div class = "col-md-4">
+          <label>Filtrar Por:</label>
+        </div>
+    </div>
+       
+
+    <br>
+
+    <div class = "row">
+        <div class = "col-xs-12 col-sm-5 col-md-5">
+            <div class = "col-xs-8 col-sm-3 col-md-2">
+              <label>Fecha: </label>
+            </div>
+            <div class = "col-xs-7 col-sm-8 col-md-7">
+              <input class = "form-control" ng-model="search.Fecha">
+            </div>
+        </div>    
+        <div class = "col-sm-5 col-md-5">
+            <div class = "col-xs-8 col-sm-3 col-md-2 margenTop">
+              <label>Tipo: </label>
+            </div>
+            <div class = "col-xs-7 col-sm-9 col-md-7">
+                <select class = "form-control" ng-model = "search.Tipo">
+                    <option value = "D">Directo</option>
+                    <option value = "CC">Cuenta Corriente</option>
+                    <option value = "{{undefined}}">Todos</option>
+                </select>
+            </div>
+        </div>        
+    </div>
+
+	<br>
+
+	<br>
+
+	<div class = "table-responsive">
+
+		<table ng-table class="table table-bordered table-hover">
+
+			<thead>
+        		<tr ng-hide = "!pagos || pagos.length === 0">
+        			<th class = "text-center">Codigo</th>
+        			<th class = "text-center">Fecha</th>
+                    <th class = "text-center">Monto</th>
+                    <th class = "text-center">Tipo</th>
+                    <th class = "text-center"></th>
+                    <th class = "text-center"></th>
+        		</tr>
+                <tr ng-hide = "pagos.length > 0"></tr>
+    		</thead>
+
+        	<tbody>
+				<tr ng-hide = "!pagos || pagos.length === 0" 
+                ng-repeat="pago in pagos | filter:search:strict">
+					<td class = "text-center">{{pago.idPagosClientes}}</td>
+    			    <td class = "text-center">{{pago.Fecha}}</td>
+                    <td class = "text-center total-label">${{pago.Monto | number: 2}}</td>
+                    <td class = "text-center">{{pago.Tipo === 'D' ? 'Directo' : 'Cuenta Corriente' }}</td>
+                    <td class = "text-center">
+                        <a ng-click="ver(pago.idPagosClientes,$index)">
+                            <i class ="glyphicon glyphicon-search"></i>
+                        </a>
+                    </td>
+                    <td class = "text-center">
+                        <a ng-click="borrarPago(pago.idPagosClientes,$index)">
+                            <i class ="glyphicon glyphicon-trash"></i>               
+                        </a>
+                    </td>
+				</tr>
+
+                <tr ng-hide = "pagos.length > 0">
+                    <td class = "text-center">Lista de pagos</td>
+                </tr>
+    		</tbody>
+
+		</table>
+
+        <div ng-if ="((pagos) && (pagos.length < limite))">
+            <td><a href = "" ng-click="cargarMas()">Cargar Más</a></td>
+        </div>
+
+	</div>
+
+    <div>
+        <alert-message class ="mensajeAlerta" alert="alertMessage" ></alert-message>
+    </div>
+
+    <div ng-show ="cargando"  class="loader">
+        <strong>{{cargando}}</strong>
+    </div>
+
+</div>
+
+

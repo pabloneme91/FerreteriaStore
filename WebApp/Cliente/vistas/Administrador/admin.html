@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="es" ng-app = "rutasAdminApp">
+<head>
+	<meta charset="UTF-8">
+	<title>Ferreteria Del Valle - Administracion</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1; user-scalable=0;
+	 minimum-scale=1.0; maximum-scale=1.0; ">
+	<link rel="stylesheet" type="text/css" href="../css/bootstrap.css">
+	<link rel="stylesheet" href="../css/estilos.css">
+	<link rel="stylesheet" type="text/css" href="../css/MediaQueries.css">
+	<link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon"> 
+	<link rel="shortcut icon" href="../Logo.ico" />
+
+</head>
+<body> 
+
+	<div class="container-fluid" ng-controller = "controlAdminHome">
+			
+		<nav class="navbar navbar-light navbar-fixed-top hidden-xs hidden-sm" style="background-color: #e3f2fd">
+		  <div class="container-fluid">
+		    <ul class="nav navbar-nav navBarAdmin1700-margenLeft" >
+		      <li class="dropdown">
+		        <a class="dropdown-toggle disabled" 
+		        	aria-expanded = "false" data-toggle="dropdown" href="">Ventas
+		        <span class="caret"></span></a>
+		        <ul class="dropdown-menu">
+		          	<li><a ui-sref = "altaVenta"><span aria-hidden="true"></span>Hacer una venta</a></li>
+			 		<li><a ui-sref ="verVentas"><span aria-hidden="true"></span>Ver Ventas</a></li>
+			 		<li><a ui-sref ="ventasPendientes"><span aria-hidden="true"></span>Ventas online</a></li>
+		        </ul>
+		      </li>
+		      <li class="dropdown">
+		        <a class="dropdown-toggle disabled" data-toggle="dropdown" href="">Clientes
+		        <span class="caret"></span></a>
+		        <ul class="dropdown-menu">
+			        <li><a ui-sref ="altaCliente"><span aria-hidden="true"></span>Dar de alta</a></li>
+				 	<li><a ui-sref ="verClientes"><span aria-hidden="true"></span>Ver clientes</a></li>
+				 	<li><a ui-sref ="cuentaCliente"><span aria-hidden="true"></span>Ver cuenta</a></li>
+				 	<li><a ui-sref ="verPagosClientes"><span aria-hidden="true"></span>Ver Pagos</a></li>
+		        </ul>
+		      </li>
+		      <li class="dropdown">
+		        <a class="dropdown-toggle disabled" data-toggle="dropdown" href="">Productos
+		        <span class="caret"></span></a>
+		        <ul class="dropdown-menu">
+			        <li><a ui-sref ="altaProducto"><span aria-hidden="true"></span>Crear producto</a></li>
+				 	<li><a ui-sref ="verProductos"><span aria-hidden="true"></span>Ver productos</a></li>
+				 	<li><a ui-sref ="altaRubro"><span aria-hidden="true"></span>Crear Rubro</a></li>
+				 	<li><a ui-sref ="verRubros"><span aria-hidden="true"></span>Ver Rubros</a></li>
+		        </ul>
+		      </li>
+		      <li class="dropdown">
+		        <a class="dropdown-toggle disabled" data-toggle="dropdown" href="">Compras
+		        <span class="caret"></span></a>
+		        <ul class="dropdown-menu">
+			        <li><a ui-sref ="altaCompra"><span aria-hidden="true"></span>Registrar Compra</a></li>
+			 		<li><a ui-sref ="verCompras"><span aria-hidden="true"></span>Ver Compras</a></li>
+		        </ul>
+		      </li>
+		      <li class="dropdown">
+		        <a class="dropdown-toggle disabled" data-toggle="dropdown" href="">Consultas
+		        <span class="caret"></span></a>
+		        <ul class="dropdown-menu">
+			        <li><a ui-sref ="verConsultas"><span aria-hidden="true"></span>Ver Consultas</a></li>
+		        </ul>
+		      </li>
+		      <li class="dropdown">
+		        <a class="dropdown-toggle disabled" data-toggle="dropdown" href="">Empleados
+		        <span class="caret"></span></a>
+		        <ul class="dropdown-menu">
+			        <li><a ui-sref ="altaEmpleado"><span aria-hidden="true"></span>Registrar Empleado</a></li>
+			 		<li><a ui-sref ="verEmpleados"><span aria-hidden="true"></span>Ver Empleados</a></li>
+		        </ul>
+		      </li>
+		      <li class="dropdown">
+		        <a class="dropdown-toggle disabled" data-toggle="dropdown" href="">Proveedores
+		        <span class="caret"></span></a>
+		        <ul class="dropdown-menu">
+			        <li><a ui-sref ="altaProveedor"><span aria-hidden="true"></span>Registrar Proveedor</a></li>
+			 	<li><a ui-sref ="verProveedores"><span aria-hidden="true"></span>Ver Proveedores</a></li>
+			 	<li><a ui-sref ="cuentaProveedor"><span aria-hidden="true"></span>Ver Cuenta</a></li>
+			 	<li><a ui-sref ="verPagosProveedores"><span aria-hidden="true"></span>Ver Pagos</a></li>
+		        </ul>
+		      </li>
+		    </ul>
+		    <ul class="nav navbar-nav navbar-right">
+		      <li class="dropdown">
+		        <a class="dropdown-toggle disabled" data-toggle="dropdown" href="">
+		        <span class="glyphicon glyphicon-user"></span>{{empleado}}
+		        <span class="caret"></span></a>
+		        <ul class="dropdown-menu">
+		        	<li>
+		        		<a ui-sref ="verDatosEmpleado">Perfil
+		        			<span class="glyphicon glyphicon-list-alt"></span>
+		        		</a>
+		        	</li>
+		        	<li>
+		        		<a href = "" ng-click = "logOut()">Salir
+		        			<span class="glyphicon glyphicon-off"></span> 
+		        		</a>
+		        	</li>
+			    </ul>
+		      </li>
+		    </ul>
+		  </div>
+		</nav>
+
+		<div class="navbar navbar-default navbar-fixed-top hidden-md hidden-lg hidden-xl" style="background-color: #e3f2fd"
+			role="navigation">
+			<div class="container">
+			    <div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<ul class="nav navbar-nav">
+						<li>
+							<a class="navbar-brand" data-toggle="collapse" data-target=".navbar-usuario"
+							style = "max-width: 70%;">
+								<span class="glyphicon glyphicon-user"></span>{{empleado}}
+								<span class="caret"></span>
+							</a>
+						</li>
+					</ul>
+			    </div>
+
+			    <div class="navbar-usuario collapse">
+			    	<ul class="nav navbar-nav">
+			    		<li class = "col-xs-12 col-sm-12">
+			    			<a class="navbar-brand" ui-sref ="verDatosEmpleado">Perfil
+			    				<span class="glyphicon glyphicon-list-alt"></span>
+			    			</a>
+			    		</li>
+						<li class= "col-xs-12 col-sm-12">
+							<a class="navbar-brand" ng-click = "logOut()" href = "">Salir
+								<span class="glyphicon glyphicon-off"></span> 	
+							</a>
+						</li>
+					</ul>
+			    </div>
+			    
+			    <div class="navbar-collapse collapse">
+			      <ul class="nav navbar-nav">
+				      <li class = "col-xs-6 col-sm-6">
+				        <a class="col-sm-7 navbar-brand dropdown-toggle" data-toggle="dropdown" href="">Ventas
+				        	<span class="caret"></span></a>
+				        <ul class="dropdown-menu">
+				          	<li class ="col-xs-12 col-sm-12"><a ui-sref = "altaVenta"><span aria-hidden="true"></span>Hacer una venta</a></li>
+					 		<li class ="col-xs-12 col-sm-12"><a ui-sref ="verVentas"><span aria-hidden="true"></span>Ver Ventas</a></li>
+					 		<li class ="col-xs-12 col-sm-12"><a ui-sref ="ventasPendientes"><span aria-hidden="true"></span>Ventas online</a></li>
+				        </ul>
+				      </li>
+				      <li class = "col-xs-6 col-sm-6">
+				        <a class="col-sm-7 navbar-brand dropdown-toggle" data-toggle="dropdown" href="">Clientes
+				        	<span class="caret"></span></a>
+				        <ul class="dropdown-menu">
+					        <li class ="col-xs-12 col-sm-12"><a ui-sref ="altaCliente"><span aria-hidden="true"></span>Dar de alta</a></li>
+						 	<li class ="col-xs-12 col-sm-12"><a ui-sref ="verClientes"><span aria-hidden="true"></span>Ver clientes</a></li>
+						 	<li class ="col-xs-12 col-sm-12"><a ui-sref ="cuentaCliente"><span aria-hidden="true"></span>Ver cuenta</a></li>
+						 	<li class ="col-xs-12 col-sm-12"><a ui-sref ="verPagosClientes"><span aria-hidden="true"></span>Ver Pagos</a></li>
+				        </ul>
+				      </li>
+				      <li class = "col-xs-6 col-sm-6">
+				        <a class="col-sm-7 navbar-brand dropdown-toggle" data-toggle="dropdown" href="">Productos
+				        	<span class="caret"></span></a>
+				        <ul class="dropdown-menu">
+					        <li class ="col-xs-12 col-sm-12"><a ui-sref ="altaProducto"><span aria-hidden="true"></span>Crear producto</a></li>
+						 	<li class ="col-xs-12 col-sm-12"><a ui-sref ="verProductos"><span aria-hidden="true"></span>Ver productos</a></li>
+						 	<li class ="col-xs-12 col-sm-12"><a ui-sref ="altaRubro"><span aria-hidden="true"></span>Crear Rubro</a></li>
+						 	<li class ="col-xs-12 col-sm-12"><a ui-sref ="verRubros"><span aria-hidden="true"></span>Ver Rubros</a></li>
+				        </ul>
+				      </li>
+				      <li class = "col-xs-6 col-sm-6">
+				        <a class="col-sm-7 navbar-brand dropdown-toggle" data-toggle="dropdown" href="">Compras
+				        	<span class="caret"></span></a>
+				        <ul class="dropdown-menu">
+					        <li class ="col-xs-12 col-sm-12"><a ui-sref ="altaCompra"><span aria-hidden="true"></span>Registrar Compra</a></li>
+					 		<li class ="col-xs-12 col-sm-12"><a ui-sref ="verCompras"><span aria-hidden="true"></span>Ver Compras</a></li>
+				        </ul>
+				      </li>
+				      <li class = "col-xs-6 col-sm-6">
+				        <a class="col-sm-7 navbar-brand dropdown-toggle" data-toggle="dropdown" href="">Consultas
+				        	<span class="caret"></span></a>
+				        <ul class="dropdown-menu">
+					        <li class ="col-xs-12 col-sm-12"><a ui-sref ="verConsultas"><span aria-hidden="true"></span>Ver Consultas</a></li>
+				        </ul>
+				      </li>
+				      <li class = "col-xs-6 col-sm-6">
+				        <a class="col-sm-7 navbar-brand dropdown-toggle" data-toggle="dropdown" href="">Empleados
+				        	<span class="caret"></span></a>
+				        <ul class="dropdown-menu">
+					        <li class ="col-xs-12 col-sm-12"><a ui-sref ="altaEmpleado"><span aria-hidden="true"></span>Registrar Empleado</a></li>
+					 		<li class ="col-xs-12 col-sm-12"><a ui-sref ="verEmpleados"><span aria-hidden="true"></span>Ver Empleados</a></li>
+				        </ul>
+				      </li>
+				      <li class = "col-xs-12 col-sm-7">
+				        <a class="col-sm-12 navbar-brand dropdown-toggle" data-toggle="dropdown" href="">Proveedores
+				        	<span class="caret"></span></a>
+				        <ul class="dropdown-menu">
+					        <li class ="col-sm-12"><a ui-sref ="altaProveedor"><span aria-hidden="true"></span>Registrar Proveedor</a></li>
+						 	<li class ="col-sm-12"><a ui-sref ="verProveedores"><span aria-hidden="true"></span>Ver Proveedores</a></li>
+						 	<li class ="col-sm-12"><a ui-sref ="cuentaProveedor"><span aria-hidden="true"></span>Ver Cuenta</a></li>
+						 	<li class ="col-sm-12"><a ui-sref ="verPagosProveedores"><span aria-hidden="true"></span>Ver Pagos</a></li>
+				        </ul>
+				      </li>
+				    </ul>
+			    </div>
+		  	</div>
+		</div>
+	</div>
+
+	<div ui-view autoscroll="true"></div>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script src="../js/dependencias/angular.min.js"></script>	
+	<script src="../js/dependencias/angular-ui-router.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-cookies.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>   
+	<script src="../js/dependencias/bootstrap.js"></script>	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
+	<script src = "https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.1.4/ui-bootstrap-tpls.js"></script>
+	<script src="../js/dependencias/ng-file-upload/dist/ng-file-upload-shim.js"></script>
+	<script src="../js/dependencias/ng-file-upload/dist/ng-file-upload.js"></script>
+	<script src="../js/controladores/indexAdmin.js"></script> 
+	<script src="../js/controladores/Administrador/controladorAdminHome.js"></script>  
+	<script src="../js/controladores/Administrador/controladorCompra.js"></script>  
+	<script src="../js/controladores/Administrador/controladorConsulta.js"></script>  
+	<script src="../js/controladores/Administrador/controladorCuentaCliente.js"></script>
+	<script src="../js/controladores/Administrador/controladorPagoCliente.js"></script>
+	<script src="../js/controladores/Administrador/controladorPagoProveedor.js"></script>
+	<script src="../js/controladores/Administrador/controladorCuentaProveedor.js"></script>
+	<script src="../js/controladores/Administrador/controladorVenta.js"></script>
+	<script src="../js/controladores/Administrador/controladorVerVentas.js"></script> 
+	<script src="../js/controladores/Administrador/controladorVerCompras.js"></script> 
+	<script src="../js/controladores/Administrador/controladorVentasPendientes.js"></script>
+	<script src="../js/controladores/Administrador/controladorEmpleado.js"></script>
+	<script src="../js/controladores/Administrador/controladorProveedor.js"></script>
+	<script src="../js/controladores/Administrador/controladorCliente.js"></script>
+	<script src="../js/controladores/Administrador/controladorProducto.js"></script>
+	<script src="../js/controladores/Administrador/controladorRubro.js"></script>
+	<script src="../js/controladores/serviciosAdmin.js"></script>
+	<script src="../js/controladores/Otros/directivaAlertaAdmin.js"></script>
+
+</body>
+</html>
+
+

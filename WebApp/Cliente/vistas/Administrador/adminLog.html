@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es" ng-app = "rutasAdminApp">
+<head>
+	<meta charset="UTF-8">
+	<title>Administracion</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1; user-scalable=0;
+	 minimum-scale=1.0; maximum-scale=1.0; ">
+	<link rel="stylesheet" type="text/css" href="../css/bootstrap.css">
+	<link rel="stylesheet" href="../css/estilos.css">
+	<link rel="stylesheet" type="text/css" href="../css/MediaQueries.css">
+	<link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon"> 
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script src="../js/dependencias/angular.min.js"></script>	
+	<script src="../js/dependencias/angular-ui-router.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-cookies.js"></script>
+	<script src="../js/dependencias/ng-file-upload/dist/ng-file-upload-shim.js"></script>
+	<script src="../js/dependencias/ng-file-upload/dist/ng-file-upload.js"></script>
+	<script src="../js/dependencias/bootstrap.js"></script>	
+	<script src = "https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.1.4/ui-bootstrap-tpls.js"></script>
+
+</head>
+	<style>
+		
+	.login{
+		max-width: 330px;
+		padding: 5px;
+		margin: 0 auto;
+	}
+
+	#sha{
+		max-width: 340px;
+		-webkit-box-shadow: 0px 0px 18px 0px rgba(48,50,50,0.48);
+		-moz-box-shadow: 0px 0px 18px 0px rgba(48,50,50,0.48);
+		box-shadow: 0px 0px 18px 0px rgba(48,50,50,0.48);
+		border-radius: 6%;
+	}
+
+	#logo{
+		margin-left: 25%;
+		display: block;
+	}
+
+	</style>
+
+	
+<body> 
+
+	<div class="container well" id="sha" ng-controller = "controlLogin">
+		<p align="center"><b>Pagina para administradores</b></p>
+		<div class="row">
+			<div class="col-xs-12" id="logo">
+				<img src="logo.jpg" align="center">
+			</div>
+		</div>
+		<br>
+		<form class="login">
+			
+			<div class ="form-group">
+				<input type="number" class ="form-control" placeholder ="Documento" 
+				name="Documento" required autofocus 
+				ng-model = "empleado.Documento"
+				onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
+			</div>
+				<br>
+			<div class="form-group">
+				<input type="password" class= "form-control" placeholder ="Contraseña" name="pass" required
+				ng-model = "empleado.Contrasenia">
+			</div>
+				<br>
+			<button class="btn btn-primary btn-lg button-bajable" ng-click = "loginEmpleado()">Ingresar</button>
+
+		</form>
+
+		<div ng-show ="cargando"  class="loader">
+			<strong>{{cargando}}</strong>
+		</div>	
+
+	</div>
+
+
+
+	<script src="../js/controladores/indexAdmin.js"></script>
+	<script src="../js/controladores/Administrador/controladorLogin.js"></script>  
+
+</body>
+
+	
+
+
+</html>
+
+

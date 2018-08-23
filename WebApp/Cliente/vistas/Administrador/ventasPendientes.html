@@ -1,0 +1,130 @@
+<br>
+<br>
+<br>
+<br>
+
+
+<div class="container well" style="background-color: #e3f2fd">
+    
+    <div class="row">
+        <div class="col-xs-12">
+            <h3 class = "text-center">Ventas Pendientes</h3>
+        </div>
+    </div>
+
+    <div class="separador" style="margin:15px 0px 15px 0px;border-top-color: #A4A4A4""></div>
+
+    <form class ="form-horizontal" autocomplete="off">
+        
+        <div class="form-group">
+            <label for="formGroup" class="col-xs-12 col-sm-1 control-label">Codigo</label>
+            <div class="col-xs-8 col-sm-5">
+                <input class="form-control" type= "text" ng-model="codigo" placeholder="Codigo de la venta.."
+                onkeypress='return (event.charCode >= 48 && event.charCode <= 57) || event.charCode == 46'>
+            </div>        
+            <div class="col-xs-3">
+                <button class="btn btn-primary btn-rounded btn-sm" ng-disabled = "!codigo" 
+                    ng-click = "btnTraerFacturaPendientePorId(codigo)">
+                    <span class="glyphicon glyphicon-search"></span>  Buscar
+                </button>    
+            </div>
+        </div>
+
+
+    <br>
+
+        <div class = "form-group">
+            <label for="formGroup" class="col-xs-12 col-sm-1 control-label">Cliente</label>
+            <div class="col-xs-10 col-sm-5" id="myselect-container">
+                <select  class="form-control" 
+                    onmousedown="if(this.options.length>5){this.size=5;}" onchange='this.size=0;' onblur="this.size=0;"  
+                    ng-model = "selectClientes" 
+                    ng-options = "obj.cliente.Nombre for obj in clientes"
+                    ng-change = "changeCliente()">
+                </select>
+            </div>
+        </div>
+    </form>
+
+	<br>
+
+	<div class = "row">
+        <div class = "col-md-4">
+          <label>Filtrar Por:</label>
+        </div>
+    </div>
+       
+
+	<br>
+
+    <div class = "row" id = "scrollTabla">
+        <div class = "col-sm-5 col-md-5">
+            <div class = "col-sm-3 col-md-2">
+              <label>Fecha: </label>
+            </div>
+            <div class = "col-sm-1 col-md-3">
+              <input ng-model="search.Fecha">
+            </div>
+        </div>        
+    </div>
+
+    <br>
+
+	<div class = "container">
+
+		<div class = "table-responsive">
+
+            <table ng-table class="table table-bordered table-hover">
+
+    			<thead>
+            		<tr ng-hide = "!facturas || facturas.length === 0">
+            			<th class = "text-center">Codigo</th>
+            			<th class = "text-center">Fecha</th>
+                        <th class = "text-center">Total</th>
+                        <th class = "text-center"></th>
+                        <th class = "text-center"></th>
+            		</tr>
+                    <tr ng-hide = "facturas.length > 0"></tr>
+        		</thead>
+
+            	<tbody>
+					<tr ng-hide = "!facturas || facturas.length === 0" ng-repeat="factura in facturas | filter:search:strict">
+    					<td class = "text-center">{{factura.idCarrito}}</td>
+    				    <td class = "text-center">{{factura.Fecha}}</td>
+                        <td class = "text-center total-label">${{factura.Total | number : 2}}</td>
+    					<td class = "text-center">
+                            <a ng-click="ver(factura.idCarrito,$index)">
+                                <i class ="glyphicon glyphicon-search"></i>
+                            </a>
+                        </td>
+                        <td class = "text-center">
+                            <a ng-click="borrarCarrito(factura.idCarrito,$index)">
+                                <i class ="glyphicon glyphicon-trash"></i>               
+                            </a>
+                        </td>
+					</tr>
+
+                    <tr ng-hide = "facturas.length > 0">
+                        <td class = "text-center">Lista de facturas</td>
+                    </tr>
+
+				</tbody>
+
+    		</table>
+
+            <div ng-if ="((facturas) && (facturas.length < limite))">
+                <td><a href = "" ng-click="cargarMas()">Cargar Más</a></td>
+            </div>
+
+	   </div>
+    </div>
+
+    <div>
+        <alert-message class ="mensajeAlerta" alert="alertMessage" ></alert-message>
+    </div>
+
+    <div ng-show ="cargando"  class="loader">
+        <strong>{{cargando}}</strong>
+    </div>
+
+</div>

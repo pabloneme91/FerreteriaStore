@@ -1,0 +1,102 @@
+<br>
+<br>
+<br>
+<br>
+
+
+<div class="container well" style="background-color: #e3f2fd">
+
+    <div class="row" id = "scrollTop">
+        <div class="col-xs-12">
+            <h3 class = "text-center">Crear Empleado</h3>
+        </div>
+    </div>
+
+    <div class="separador" style="margin:15px 0px 15px 0px;border-top-color: #A4A4A4"></div>
+
+	<form class ="form-horizontal" autocomplete="off">
+
+		<div class="form-group">
+			<label for="formGroup" class ="col-xs-12 col-sm-2">Nombre*</label>
+			<div class="col-xs-10 col-sm-6">
+				<input type="text" class="form-control" id="formGroup" ng-model = "empleadoNuevo.Nombre">
+			</div>
+		</div>
+
+
+		<div class="form-group">
+			<label for="formGroup" class ="col-xs-12 col-sm-2">Apellido*</label>
+			<div class="col-xs-10 col-sm-6">
+				<input type="text" class="form-control" id="formGroup" ng-model = "empleadoNuevo.Apellido">
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label for="formGroup" class ="col-xs-12 col-sm-2">Documento*</label>
+			<div class="col-xs-10 col-sm-6">
+				<input type="text" class="form-control" id="formGroup" ng-model = "empleadoNuevo.Documento"
+				onkeypress='return (event.charCode >= 48 && event.charCode <= 57)'>
+			</div>			
+		</div>
+
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-2 col-md-2" for="form-group">Telefono</label>
+			<div class="col-xs-10 col-sm-6 col-md-6">
+				<div class="input-group">
+					<input class="form-control" type ="text" ng-model = "empleadoNuevo.Telefono"
+					onkeypress='return (event.charCode >= 48 && event.charCode <= 57)'>
+					<span class="input-group-addon"><span class="glyphicon glyphicon-phone"></span></span>
+				</div>
+			</div>				
+		</div>
+
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-2 col-md-2" for="form-group">Correo Electronico*</label>
+			<div class="col-xs-10 col-sm-6 col-md-6">
+				<div class="input-group">
+					<input type="text" class="form-control" ng-model = "empleadoNuevo.Mail">
+					<span class="input-group-addon">@</span>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-2 col-md-2" for="form-group">Rol*</label>
+			<div class="col-xs-10 col-sm-6 col-md-6">
+				<select class ="form-control" ng-model = "empleadoNuevo.Rol">
+					<option>Empleado</option>
+					<option>Administrador</option>
+				</select>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-2 col-md-2" for="form-group">Contraseña*</label>
+			<div class="col-xs-10 col-sm-6 col-md-6">
+				<input class="form-control" type ="password" ng-model = "empleadoNuevo.Contrasenia">
+			</div>
+		</div>
+
+		<div class="form-group">
+			<div class="col-xs-12 col-sm-8 col-sm-offset-2">
+				<button class="btn btn-success btn-lg"  
+					ng-disabled = "!empleadoNuevo.Nombre || !empleadoNuevo.Apellido || !empleadoNuevo.Documento || !empleadoNuevo.Mail ||
+					!empleadoNuevo.Rol || !empleadoNuevo.Contrasenia"
+					ng-click = "crearEmpleado()">
+					<span class="glyphicon glyphicon-ok"></span>  Crear
+				</button>
+			</div>
+		</div>
+
+	</form>
+
+	<div>
+        <alert-message class ="mensajeAlerta" alert="alertMessage" ></alert-message>
+    </div>
+
+    <div ng-show ="cargando"  class="loader">
+        <strong>{{cargando}}</strong>
+    </div>
+    
+</div>

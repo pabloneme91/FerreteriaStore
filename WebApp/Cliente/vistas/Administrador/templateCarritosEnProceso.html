@@ -1,0 +1,50 @@
+<div class="modal-header">
+    <h3 class="text-center modal-title" id="modal-title">Ventas Pendientes del Producto : {{selectProductos.Nombre}}</h3>
+</div>
+
+<div class = "modal-body">
+
+    <div class = "table-responsive">
+
+        <table ng-table class="table table-bordered table-hover">
+
+            <thead>
+                <tr>
+                    <th class = "text-center">Codigo</th>
+                    <th class = "text-center">Fecha</th>
+                    <th class = "text-center">Cliente</th>
+                    <th class = "text-center"></th>
+                    <th class = "text-center"></th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr ng-repeat="factura in facturas">
+                    <td class = "text-center">{{factura.idCarrito}}</td>
+                    <td class = "text-center">{{factura.Fecha || '-'}}</td>
+                    <td class = "text-center">{{factura.cliente.Nombre}}</td>
+                    <td class = "text-center">
+                        <a ng-click="verDetalle(factura.idCarrito,$index)">
+                            <i class ="glyphicon glyphicon-search"></i>
+                        </a>
+                    </td>
+                    <td class = "text-center">
+                        <a ng-click="irAVenta(factura.idCarrito)">
+                            <i class ="glyphicon glyphicon-arrow-right"></i>
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+            
+        </table>
+    </div>
+
+</div>
+
+<div class="modal-footer">
+    <button class="btn btn-warning" type="button" ng-click="cerrarModal()">Cerrar</button>
+</div>
+
+<div ng-show ="cargando"  class="loader">
+    <strong>{{cargando}}</strong>
+</div>

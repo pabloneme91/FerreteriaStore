@@ -1,0 +1,74 @@
+<style>
+th {
+    text-align: left;
+    padding: 8px;
+    font-size : 20px
+}
+
+td {
+    text-align: left;
+    padding: 8px;
+    font-size : 15px
+}
+</style>
+
+<div class="modal-header">
+    <h2 class="modal-title text-center" id="modal-title">Encargo Realizado Exitosamente.
+</div>
+
+<div class = "modal-body">
+
+    <div class = "table-responsive">
+
+        <table ng-table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th class = "text-center">Codigo</th>
+                    <th class = "text-center">Fecha</th>
+                    <th class = "text-center">Total</th>
+                    <th></th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <td class = "text-center">{{datosCarrito.idCarrito}}</td>
+                    <td class = "text-center">{{datosCarrito.Fecha}}</td>
+                    <td class = "text-center total-label">${{datosCarrito.Total | number:2}}</td>
+                    <td class = "text-center">
+                        <a ng-click="mostrarModalCompra(true)">
+                            <i class ="glyphicon glyphicon-search"></i>
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+
+        </table>
+
+    </div>
+
+    <div>
+        <p>Los datos de la compra realizada se enviaron al correo electronico que figura en su cuenta. A su vez puede descargar 
+        un PDF con los mismos haciendo click en el boton de abajo ("Descargar PDF"). Puede retirar su encargo presentando en ventanilla 
+        cualquiera de ellos. En caso de contar con cuenta corriente y querer adhirer esta compra a la misma debera presentar el documento
+        de la persona titular de la cuenta</p>
+    </div>
+
+    <div>
+        <p>Se recuerda que dispone de 1 hora para retirar el encargo realizado a partir
+        del momento en que se hizo el pedido o a partir de la apertura del local
+        en el proximo horario habil.</p>
+    </div>
+
+</div>        
+
+<div class="modal-footer">
+    <button class="btn btn-primary" type="button" ng-click="descargarPDF()">Descargar PDF</button>
+    <button class="btn btn-warning" type="button" ng-click="cerrarModal()">Cerrar</button>
+</div>
+
+<div ng-show ="cargando"  class="loader">
+    {{cargando}}
+</div>
+
+

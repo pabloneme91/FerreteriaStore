@@ -1,0 +1,71 @@
+<div class="modal-header">
+    <h3 class="modal-title text-center" id="modal-title">Detalle Factura</h3>
+</div>       
+
+<div class = "modal-body">
+
+    <div class = "table-responsive">
+
+        <table ng-table class="table table-bordered table-hover">
+
+            <thead>
+                <tr>
+                    <th class = "text-center">Producto</th>
+                    <th class = "text-center">Precio</th>
+                    <th class = "text-center">Cantidad</th>
+                    <th class = "text-center">Total</th>
+                    <th class = "text-center"></th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr ng-repeat="objeto in detalleCarrito">
+                    <td class = "text-center">{{objeto.producto.Nombre}}</td>
+                    <td class = "text-center">${{objeto.PrecioProducto | number:2}}</td>
+                    <td class = "text-center">{{objeto.Cantidad}}</td>
+                    <td class = "text-center total-label">${{objeto.Total | number:2}}</td>
+                    <td class = "text-center" ng-hide = "vista === 'altaVenta'" >
+                        <a ng-click = "borrarProducto(objeto.idLineaCarrito,objeto.idCarrito,$index)">
+                            <i class ="glyphicon glyphicon-trash"></i>               
+                        </a>
+                    </td>
+                    <td class = "text-center" ng-hide = "vista === 'ventasPendientes'">
+                        <a ng-click="borrarProducto(objeto.idLineaCarrito,objeto.idCarrito,objeto.Cantidad)" 
+                            ng-hide = "!(vista === 'altaVenta' && selectProductos.Nombre === objeto.producto.Nombre)">
+                            <i class ="glyphicon glyphicon-trash"></i>               
+                        </a>
+                    </td>
+                    <td ng-init="$parent.sumTotales = $parent.sumTotales + objeto.Total" ng-hide = "true"></td> <!--Total de facturas en altaVenta-->
+                </tr>
+            </tbody>
+            
+        </table>
+        
+    </div>
+
+    <div class="separador" style="margin:15px 0px 15px 0px;"></div>
+
+    <!--<div class = "col-xs-offset-9 col-sm-offset-9 col-md-offset-9 total-input">-->
+    <div class = "total-input">
+        <label ng-show = "vista === 'ventasPendientes'">Total = ${{facturas[indexFactura].Total | number : 2}}</label>
+        <label ng-show = "vista === 'altaVenta'">Total = ${{sumTotales | number:2}}</label>
+    </div>
+</div> 
+
+<div class="modal-footer">
+            <button ng-show = "vista === 'ventasPendientes'" class="btn btn-primary" type="button" 
+                ng-click="entregarProducto('CC',detalleCarrito[0].idCarrito)">A Cuenta
+            </button>
+            <button  ng-show = "vista === 'ventasPendientes'"class="btn btn-success" type="button" 
+                ng-click="entregarProducto('P',detalleCarrito[0].idCarrito)">Pagado
+            </button>
+            <button  class="btn btn-warning xs-299-margenTop" type="button" ng-click="cerrarModal()">Cerrar</button>
+</div>  
+
+<div ng-show ="cargando"  class="loader">
+    <strong>{{cargando}}</strong>
+</div>
+
+
+
+

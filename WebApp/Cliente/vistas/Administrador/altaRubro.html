@@ -1,0 +1,52 @@
+<br>
+<br>
+<br>
+<br>
+
+
+<div class="container well" style="background-color: #e3f2fd">
+
+    <div class="row" id = "scrollTop">
+        <div class="col-xs-12">
+            <h3 class = "text-center">Crear SubRubro</h3>
+        </div>
+    </div>
+
+    <div class="separador" style="margin:15px 0px 15px 0px;border-top-color: #A4A4A4"></div>
+
+	<form class="form-horizontal">
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-2 col-md-2" for="fromGroup">Nombre SubRubro</label>
+			<div class="col-xs-10 col-sm-6 col-md-4">
+				<input class="form-control" type ="text" placeholder="Ej: Construcción" ng-model = "txtRubro.Nombre">
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label for="fromGroup" class="col-xs-12 col-sm-2 col-md-2">Rubro al que pertenece</label>
+			<div class="col-xs-10 col-sm-6 col-md-4">
+				<select class ="form-control" ng-model = "selectRubro" 
+					ng-options = "rubro.Rubro for rubro in rubros">
+				</select>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<div class="col-xs-12 col-sm-8 col-sm-offset-2">
+				<button ng-disabled = "!txtRubro.Nombre || !selectRubro" 
+					class="btn btn-success btn-lg" ng-click = "crearRubro()">
+					<span class="glyphicon glyphicon-ok"></span>  Crear
+				</button>
+			</div>
+		</div>
+	</form>
+	
+	<div>
+	    <alert-message class ="mensajeAlerta" alert="alertMessage" ></alert-message>
+	</div>
+
+	<div ng-show ="cargando"  class="loader">
+	    <strong>{{cargando}}</strong>
+	</div>
+
+</div>

@@ -1,0 +1,84 @@
+    
+<div class="container well" style="background-color: #e3f2fd">
+
+	<form class ="form-horizontal" autocomplete="off">
+
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-2" for="fromGroup">Usuario</label>
+			<div class="col-xs-11 col-sm-4">
+				<input class="form-control" type ="text"  ng-Value = 'cliente.Apellido + ", " + cliente.Nombre' readonly="true">
+			</div>
+		</div>
+
+
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-2" for="fromGroup">Fecha de Nacimiento</label>
+			<div class="col-xs-11 col-sm-4">
+				<input class="form-control" type ="text"  ng-model = "cliente.FechaNacimiento" readonly="true">
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-2" for="fromGroup">DNI</label>
+			<div class="col-xs-11 col-sm-4">
+				<input class="form-control" type ="text"  ng-model = "cliente.Documento" readonly="true">
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-2" for="fromGroup">Telefono*</label>
+			<div class="col-xs-11 col-sm-4">
+				<div class="input-group">
+					<input class="form-control" type ="text"  ng-model = "cliente.Telefono">
+					<span class="input-group-addon"><span class="glyphicon glyphicon-phone"></span></span>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-2" for="form-group">Mail*</label>
+			<div class="col-xs-11 col-sm-4">
+				<div class="input-group">
+					<input type="email" class="form-control"  ng-model = "cliente.Mail">
+					<span class="input-group-addon">@</span>
+				</div>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-2" for="form-group">Nueva Contraseña</label>
+			<div class="col-xs-11 col-sm-4">
+				<input type="password" class="form-control"  ng-model = "contrasenia">
+			</div>
+		</div>
+
+		<div class="form-group">
+			
+		</div>
+
+
+	</form>
+
+	<div class="form-group">
+		<div class="col-sm-2 col-sm-offset-2">
+				<button type="button" class="btn btn-info btn-lg" ng-click = "verDeuda()">
+				<span class="glyphicon glyphicon-info-sign"></span>Ver Deuda</button>
+		</div>
+		<div class="col-sm-2 col-sm-offset-1 col-md-offset-0 margenTop">
+			<button type="button" class="btn btn-success btn-lg" ng-click = "guardar()">
+			<span class="glyphicon glyphicon-floppy-saved"></span>Guardar Cambios</button>
+		</div>
+	</div>
+
+	<div>
+		<alert-message class ="mensajeAlerta" alert="alertMessage" ></alert-message>
+	</div>
+
+	<div ng-show ="cargando"  class="loader">
+		{{cargando}}
+	</div>
+
+</div>
+
+

@@ -1,0 +1,95 @@
+<br>
+<br>
+<br>
+<br>
+
+
+<div class="container well" style="background-color: #e3f2fd">
+
+	<div class="row" id = "scrollTop">
+		<div class="col-xs-12">
+			<h3 class = "text-center">Consultas</h3>
+		</div>
+	</div>
+
+	<div class="separador" style="margin:15px 0px 15px 0px;border-top-color: #A4A4A4""></div>
+
+	<form class ="form-horizontal">
+
+		<div class="form-group">
+			<label for="formGroup" class="col-xs-12 col-sm-2 col-md-2">Cliente</label>
+			<div class="col-xs-10 col-sm-6"> 
+                <select class="form-control" 
+                ng-model = "selectClientes" 
+               	ng-options = "objCliente.cliente.Apellido + ', ' + objCliente.cliente.Nombre for objCliente in clientes"
+                ng-change = "changeCliente()">
+                </select>
+            </div>
+		</div>
+
+		<div class="form-group">
+			<label for="formGroup" class="col-xs-12 col-sm-2 col-md-2">Consultas</label>
+			<div class="col-xs-10 col-sm-6"> 
+                <select class="form-control" 
+                ng-model = "selectConsultas" 
+                ng-options = "consulta.Contenido for consulta in consultas"
+                ng-disabled = "!selectClientes">
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+			<label for="formGroup" class="col-xs-12 col-sm-2 col-md-2">Producto</label>
+			<div class="col-xs-10 col-sm-6">
+				<input type ="text" rows="4" class="form-control" disabled ng-model ="selectConsultas.producto.Nombre">
+			</div>			
+		</div>
+
+		<div class="form-group">
+			<label for="formGroup" class="col-xs-12 col-sm-2 col-md-2 ">Descripcion</label>
+			<div class="col-xs-10 col-sm-6">
+				<textarea rows="4" class="form-control" disabled ng-model ="selectConsultas.Contenido"></textarea>
+			</div>			
+		</div>
+
+		<div class="form-group">
+			<label for="formGroup" class="col-xs-12 col-sm-2 col-md-2 ">Foto</label>
+			<div class="col-sm-2" ng-show = selectConsultas.Foto>
+				<img class ="img-responsive" 
+				src = "{{selectConsultas.Foto}}"
+					style="margin:inherit;">
+				<a href="{{selectConsultas.Foto}}" target="_blank">{{selectConsultas.Foto}}</a>
+			</div>			
+		</div>
+
+		<div class="form-group">
+			<label for="formGroup" class="col-xs-12 col-sm-2 col-md-2 ">Respuesta</label>
+			<div class="col-xs-10 col-sm-6">
+				<textarea rows="4" class="form-control" ng-model = "respuesta"></textarea>
+			</div>			
+		</div>
+
+		<div class="form-group">
+			<label for="formGroup" class="col-xs-12 col-sm-2 col-md-2 "></label>
+			<div class="col-xs-10 col-sm-6"> 
+				<button type="button" class="btn btn-success btn-lg" ng-click = "enviar()"
+					ng-disabled = "!selectConsultas.Contenido || !respuesta">
+					<span class="glyphicon glyphicon-ok"></span> Enviar
+				</button>
+			</div>
+		</div>
+
+	</form>
+
+
+    <div>
+        <alert-message class ="mensajeAlerta" alert="alertMessage" ></alert-message>
+    </div>
+
+    <div ng-show ="cargando"  class="loader">
+        <strong>{{cargando}}</strong>
+    </div>
+
+</div>
+
+

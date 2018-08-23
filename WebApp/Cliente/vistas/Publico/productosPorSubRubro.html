@@ -1,0 +1,78 @@
+<style type="text/css" name = "removeInputSpinner"> 
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0; 
+}
+</style>
+<div class="container" id = "top">
+    <div class="row">
+		<div class="col-xs-12">
+			<h1 id="tituloResultado" ng-if = "!(busqueda === null)"><p class="text-primary text-center"><b>Resultados para "{{busqueda}}"</b></p></h1>
+			<h1 id="tituloResultado" ng-if = "(busqueda === null)"><p class="text-primary text-center"><b>Debe elegir el rubro a buscar</b></p></h1>
+			<br>
+		</div>
+	</div>
+
+	<div class="row" ng-if = "!(busqueda === null)">
+		<div >
+			<p>
+			<label class="text-primary text-center">Ordenar Por :</label>
+			<a href="" ng-click = "ordenar(1,pagina)">Mayor Precio</a>
+			<a href="" ng-click = "ordenar(0,pagina)">Menor Precio</a>
+			</p>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-xs-12 col-sm-6 col-md-3" ng-repeat = "producto in productos">
+			<div class="thumbnail text-left">
+				<a ui-sref = "miapp.productoUnico({obj : producto})">
+					<img class ="img-responsive" 
+						ng-src= {{producto.Foto}} alt="No se puedo cargar la foto"
+						style="margin:inherit;">
+				</a>
+				<div  class="caption alert-info">
+					<div >
+						<h4 class = "cortarString">{{producto.Nombre}}</h4>
+					</div>
+					<div >
+						<h5 class = "cortarString">{{producto.Descripcion}}</h5>
+					</div>
+					<span>${{producto.Precio | number : 2}}</span>
+					<p>
+					<div class = "col-xs-12 all-margenLeft" >
+						<label class = "col-xs-4 col-sm-4 col-md-7 all-margenTop">Cantidad</label>
+						<input class = "col-xs-4 col-sm-4 col-md-5 all-margenTop" 
+							type = "number" ng-model = "producto.cantidad"
+							onkeypress='return (event.charCode >= 48 && event.charCode <= 57)'
+							ng-keydown="$event.which === 13 && agregarCarrito($index,producto.cantidad)"> 
+					</div>
+					<button  class="btn btn-success btn-md all-margenTop" ng-click = "agregarCarrito($index,producto.cantidad)" >
+					<span class="glyphicon glyphicon-plus-sign"></span> Agregar
+					</button>
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class = "row" id = "anchor">
+		<ul ng-show = "!(busqueda === null)" uib-pagination total-items= "total" ng-model="pagina" Items-per-page = "4"
+        rotate="false" max-size = "5" ng-change = "pageChangedSubRubro(pagina)">
+        </ul>
+    </div>
+
+	<div>
+		<alert-message class ="mensajeAlerta" alert="alertMessage" ></alert-message>
+	</div>
+	
+	<div ng-show ="cargando"  class="loader">
+		{{cargando}}
+	</div>
+
+</div>
+
+

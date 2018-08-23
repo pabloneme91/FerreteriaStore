@@ -1,0 +1,108 @@
+<br>
+<br>
+<br>
+<br>
+
+
+<div class="container well" style="background-color: #e3f2fd">
+
+	<div class="row">
+		<div class="col-xs-12">
+			<h3 class = "text-center">Clientes</h3>
+		</div>
+	</div>
+
+	<div class="separador" style="margin:15px 0px 15px 0px;border-top-color: #A4A4A4"></div>
+
+	<div class="row">
+		<div class="col-xs-12">
+			<h4 class = "text-left" style="color : blue"><b>{{tipo || "Activos"}}</b></h4>
+		</div>
+	</div>
+
+	<form class ="form-horizontal">
+		<div class = "form-group">
+	        <label for="formGroup" class="col-xs-12 col-sm-2">Nombre y Apellido</label>
+	        <div class="col-xs-10 col-sm-5" id="myselect-container"> 
+	            <select  class="form-control" 
+	                onmousedown="if(this.options.length>5){this.size=5;}" onchange='this.size=0;' onblur="this.size=0;"
+	                ng-model = "selectClientes" 
+			        ng-options = "cliente.Apellido + ', ' + cliente.Nombre for cliente in clientes">
+	            </select>
+	        </div>
+    	
+			<div class = "col-xs-5 col-sm-2 col-md-2">
+				<button class="btn btn-primary btn-rounded btn-sm margenTop"
+                    ng-click= "traerDeudores()">
+                    <span class="glyphicon glyphicon-refresh"></span>  Cargar Deudores
+                </button>    
+			</div>
+			<div class = "col-xs-3 col-sm-2 col-md-2">
+				<button class="btn btn-primary btn-rounded btn-sm margenTop xs-margenLeft sm-margenLeft"
+					ng-click= "traerTodos()">
+                    <span class="glyphicon glyphicon-refresh"></span>  Cargar Activos
+                </button>    
+			</div>
+		</div>
+
+
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-2" for="fromGroup">Fecha de Nacimiento*</label>
+			<div class="col-xs-10 col-sm-5">
+				<input class="form-control" type ="text"  ng-model = "selectClientes.FechaNacimiento" readonly="true">
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-2" for="fromGroup">DNI*</label>
+			<div class="col-xs-10 col-sm-5">
+				<input class="form-control" type ="text"  ng-model = "selectClientes.Documento" readonly="true">
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-2" for="fromGroup">Telefono</label>
+			<div class = "col-xs-10 col-sm-5" >
+				<div class="input-group">
+					<input class="form-control" type ="text" disable ng-model = "selectClientes.Telefono" ng-readonly = "true">
+					<span class="input-group-addon"><span class="glyphicon glyphicon-phone"></span></span>
+				</div>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-2" for="form-group">Correo Electronico</label>
+			<div  class = "col-xs-10 col-sm-5">
+				<div class="input-group">
+					<input type="text" class="form-control" disable ng-model = "selectClientes.Mail" ng-readonly = "true">
+					<span class="input-group-addon">@</span>
+				</div>
+			</div>
+		</div>
+
+		<br>
+
+		<div class="form-group">
+			<div class="col-sm-3 col-sm-offset-2" >
+					<button type="button" class="btn btn-info btn-lg" ng-click = "verDeuda()" 
+					ng-disabled = "!selectClientes">
+					<span class="glyphicon glyphicon-info-sign"></span>  Ver Deuda  
+					<span class="glyphicon glyphicon-arrow-right"></span>
+					</button>
+			</div>
+		</div>
+
+
+
+	</form>
+
+	<div>
+        <alert-message class ="mensajeAlerta" alert="alertMessage" ></alert-message>
+    </div>
+
+    <div ng-show ="cargando"  class="loader">
+        <strong>{{cargando}}</strong>
+    </div>
+
+</div>
+

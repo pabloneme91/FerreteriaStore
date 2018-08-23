@@ -1,0 +1,48 @@
+<div class="modal-header">
+    <h3 ng-if = "!compraRealizada" class="text-center modal-title" id="modal-title">Confirmar Compra</h3>
+    <h3 ng-if = "compraRealizada" class="text-center modal-title" id="modal-title">Detalle compra realizada</h3>
+</div>
+
+<div class="modal-body">
+
+	<div class = "table-responsive">
+
+        <table ng-table class="table table-bordered table-hover">
+
+            <thead>
+                <tr>
+                    <th class = "text-center">Producto</th>
+                    <th class = "text-center">Precio</th>
+                    <th class = "text-center">Cantidad</th>
+                    <th class = "text-center">SubTotal</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr ng-repeat="objeto in lineas">
+                    <td class = "text-center">{{objeto.producto.Nombre}}</td>
+                    <td class = "text-center">${{objeto.producto.Precio | number : 2}}</td>
+                    <td class = "text-center">{{objeto.Cantidad}}</td>
+                    <td class = "text-center total-label">${{objeto.Total | number : 2}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+	<div class = "total-input">
+		<label>Total : ${{datosCarrito.Total | number:2}}</label>
+	</div>
+
+</div>
+
+<div class="modal-footer">
+    <button ng-if ="!compraRealizada" class="btn btn-success btn-md" type="button" ng-click="comprar()">Comprar</button>
+    <button class="btn btn-warning" type="button" ng-click="cerrarModal()">Cerrar</button>
+</div>
+
+<div ng-show ="cargando"  class="loader">
+	{{cargando}}
+</div>
+
+

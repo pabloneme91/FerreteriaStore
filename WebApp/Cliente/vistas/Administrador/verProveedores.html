@@ -1,0 +1,126 @@
+<br>
+<br>
+<br>
+<br>
+
+<div class="container well" style="background-color: #e3f2fd">
+
+	<div class="row" id = "scrollTop">
+		<div class="col-xs-12">
+			<h3 class = "text-center">Proveedores</h3>
+		</div>
+	</div>
+
+	<div class="separador" style="margin:15px 0px 15px 0px;border-top-color: #A4A4A4""></div>
+
+	<div class="row">
+		<div class="col-xs-12">
+			<h4 class = "text-left" style="color : blue"><b>{{estado}}</b></h4>
+		</div>
+	</div>
+
+	<form class ="form-horizontal">
+		<div class="form-group">
+			<label for="formGroup" class="col-xs-12 col-sm-2">Proveedor</label>
+			<div class="col-xs-10 col-sm-5"> 
+				<select class="form-control" 
+                ng-model = "selectProveedor" 
+                ng-options = "proveedor.Nombre for proveedor in proveedores"
+                ng-change = "changeProveedor()">
+                </select>					
+			</div>
+			<div class = "col-xs-5 col-sm-2 col-md-2">
+				<button class="btn btn-primary btn-rounded btn-sm margenTop"
+	                ng-click= "traerProveedoresConDeuda()">
+	                <span class="glyphicon glyphicon-refresh"></span> Buscar Con Deuda
+	            </button>    
+				</div>
+			<div class = "col-xs-4 col-sm-2 col-md-2">
+				<button class="btn btn-primary btn-rounded btn-sm margenTop xs-margenLeft sm-margenLeft"
+					ng-click= "traerProveedores()">
+                    <span class="glyphicon glyphicon-refresh"></span> Todos
+                </button> 
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-2" for="form-group">Nombre</label>
+			<div class="col-xs-10 col-sm-5">
+				<input type="text" class="form-control"  
+				ng-model = "auxProveedor.Nombre"
+				ng-disabled = "!selectProveedor">
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-2" for="fromGroup">Telefono</label>
+			<div class = "col-xs-10 col-sm-5" >
+				<div class="input-group">
+					<input class="form-control" type ="text" 
+					ng-model = "auxProveedor.Telefono"
+					ng-disabled = "!selectProveedor">
+					<span class="input-group-addon"><span class="glyphicon glyphicon-phone"></span></span>
+				</div>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-2" for="form-group">Correo Electronico*</label>
+			<div  class = "col-xs-10 col-sm-5">
+				<div class="input-group">
+					<input type="text" class="form-control" 
+					ng-model = "auxProveedor.Mail"
+					ng-disabled = "!selectProveedor"
+					required>
+					<span class="input-group-addon">@</span>
+				</div>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-2" for="form-group">Saldo</label>
+			<div class="col-xs-6 col-sm-3">
+				<input type="text" class="form-control"  
+				ng-model = "auxProveedor.Saldo"
+				onkeypress='return (event.charCode >= 48 && event.charCode <= 57) || event.charCode == 46'
+				ng-disabled = "!selectProveedor">
+			</div>
+		</div>
+
+		<div class="form-group">
+			<div class="col-xs-6 col-sm-2 col-sm-offset-2 col-md-2">
+				<button class="btn btn-success btn-lg" 
+					ng-disabled = "!auxProveedor.Mail || !auxProveedor.Nombre"
+					ng-click = "modificarProveedor()">
+					<span class="glyphicon glyphicon-ok"></span>  Guardar</button>
+			</div>
+			<div class="col-xs-6 col-sm-3 col-sm-offset-1 col-md-1 col-md-offset-0">
+				<button type="button" class="btn btn-danger btn-lg" 
+				ng-disabled = "!selectProveedor"
+				ng-click = "borrarProveedor()">
+				<span class="glyphicon glyphicon-trash">
+				</span>  Borrar</button>
+			</div>
+			<div class="col-xs-6 col-sm-3 col-sm-offset-2 col-md-offset-1 margenTop sm-margenTop">
+				<button type="button" class="btn btn-info btn-lg" ng-click = "verDeuda()" 
+				ng-disabled = "!selectProveedor">
+				<span class="glyphicon glyphicon-info-sign"></span>  Ver Deuda  
+				<span class="glyphicon glyphicon-arrow-right"></span>
+				</button>
+			</div>
+		</div>
+
+	</form>
+
+	<div>
+        <alert-message class ="mensajeAlerta" alert="alertMessage" ></alert-message>
+    </div>
+
+    <div ng-show ="cargando"  class="loader">
+        <strong>{{cargando}}</strong>
+    </div>
+
+
+
+	</div>
+

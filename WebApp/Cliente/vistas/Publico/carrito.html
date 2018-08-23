@@ -1,0 +1,79 @@
+<div class="container" id = "top">
+	<div ng-if = "(lineas.length > 0) && (sesion)">
+		<div class="row">
+			<h2 class= " text-primary text-center"><b>Mi Carrito</b></h2>
+		</div>
+		<br><br>
+
+<!-- Productos encargados -->
+		<div class="row well" ng-repeat="linea in lineas">
+			
+			<div class="col-sm-2">
+				<img ng-src= {{linea.producto.Foto}} alt="..." class ="img-responsive">
+			</div>
+			<div class="col-sm-6">
+				<div class = "cortarString">
+					<FONT color="blue" align="left"><u><h3><strong>{{linea.producto.Nombre}}</strong></h3></u></FONT> 
+				</div>
+				<div class = "cortarString">
+					<h5>{{linea.producto.Descripcion}}</h5>
+				</div>
+			</div>
+			<div class="col-sm-3">
+				<p><b>Cantidad:  {{linea.Cantidad}}</b></p>
+				<p><b>Precio unitario: $ {{linea.producto.Precio | number: 2}}</b></p>
+				<p><b>SubTotal = $ {{linea.Total | number : 2}}</b></p>
+				<button  type="button" class="btn btn-danger btn-md" 
+					ng-click = "borrar($index)">
+					<span class="glyphicon glyphicon-trash">
+					</span>  Borrar</button>
+			</div>
+			<div class="col-sm-1">
+				<br><br>
+			</div>
+		</div>
+
+		<br>
+
+		<div class="row well hidden-xs">
+			<div class = "col-xs-12 col-sm-8 col-md-6">
+				<font size = "5px"><label  class = "col-xs-12 col-sm-6 col-md-6">Total Carrito = </label>    </font>
+				<font size = "5px"><input type = "text" class = "col-xs-5 col-sm-5 col-md-5 monto-label-bold" 
+                value ="${{datosCarrito.Total | number:2}}" disabled></font>
+			</div>
+			<div class="col-sm-4">
+				<button type="button" class="btn btn-success btn-lg" ng-click = "mostrarModalCompra(false)">Realizar compra</button>
+			</div>
+		</div>
+
+		<div class="row well hidden-sm hidden-md hidden-lg">
+			<div class = "col-xs-12">
+				<font size = "3px"><label  class = "col-xs-7">Total Carrito = </label>    </font>
+				<font size = "3px"><input type = "text" class = "col-xs-5 monto-label-bold" 
+                value ="${{datosCarrito.Total | number:2}}" disabled></font>
+			</div>
+			<div class="col-xs-12">
+				<button type="button" class="btn btn-success btn-md margenTop" ng-click = "mostrarModalCompra(false)">Realizar compra</button>
+			</div>
+		</div>
+
+	</div>
+
+	<div ng-show = "((lineas === undefined || lineas.length === 0) && (sesion))">
+		<h1><p class="text-primary text-center"><b>No hay Productos en el carrito</b></p></h1>
+	</div>
+
+	<div ng-if = "!sesion">
+		<h1><p class="text-primary text-center">
+				<a ng-click = "login()">
+					<b>{{error}}</b>
+				</a>
+			</p>
+		</h1>
+	</div>
+
+	<div ng-show ="cargando"  class="loader">
+		{{cargando}}
+	</div>
+
+</div>

@@ -1,0 +1,268 @@
+<div class="container">
+											<!-- NavBar Vista para monitores -->
+
+	<div class="navbar navbar-light navbar-fixed-top alert-info hidden-xs hidden-sm">
+	  <div class="container">
+	    <div class="navbar-header" style = "margin-right: 10px">
+	      	<a aria-expanded = "false" ui-sref="miapp.home">
+				<img id = "logo" src="img/Logo.jpg"
+				alt = "Error al cargar la imagen">
+			</a>
+	    </div>
+	    <div class="navbar-collapse collapse" id="searchbar">
+	     	<ul class="nav navbar-nav navbar-right">
+				<li>
+					<a  ng-if= "!varCliente" class="navbar" aria-expanded = "false" ui-sref="miapp.login">
+						<strong>Ingresar</strong>
+					</a>
+				</li>
+				<li ng-if= "varCliente" class="dropdown">
+				    <a>
+				        <span class="glyphicon glyphicon-user"></span>
+				        	{{varCliente.Apellido}}, {{varCliente.Nombre}}
+				        <span class="caret"></span></a>
+				    <ul class="dropdown-menu">
+						<li>
+					    	<a ui-sref="miapp.carrito">Carrito
+					        	<span class="glyphicon glyphicon-shopping-cart"></span>
+					        </a>
+					    </li>
+					    <li>
+					    	<a ui-sref ="miapp.verDatosCliente">Perfil
+					        	<span class="glyphicon glyphicon-list-alt"></span>
+					        </a>
+					    </li>
+					    <li>
+					    	<a ng-click = "logOut()">Salir
+					        	<span class="glyphicon glyphicon-off"></span> 
+					        </a>
+					    </li>
+					    
+					</ul>        
+				</li>        
+	      	</ul>
+
+			<ul class="nav navbar-nav navbar-right">
+				<li>
+					<a  aria-expanded = "false" ui-sref="miapp.consultas"><strong>Consultas</strong></a>
+				</li>
+				<li id="userPage">
+				  <a  aria-expanded = "false" ui-sref="miapp.registro"><strong>Registrarse</strong></a>
+				</li>
+				<li>
+					<a  aria-expanded = "false" ui-sref="miapp.contacto"><strong>Contactanos</strong></a>
+				</li>
+			</ul>
+
+	    	<form class="navbar-form" ng-submit = "estadoProductosPorNombre()">
+	        	<div class="form-group" style="display:inline;">
+	          		<div class="input-group" style="display:table;">
+						<input 
+						class="form-control"
+						type="text" placeholder="Buscar producto..." 
+						ng-model="producto" 
+						uib-typeahead="producto as producto.Nombre for producto in traerProductos($viewValue)" 
+						typeahead-loading="spinCargando" 
+						typeahead-no-results="sinResultados" 
+						typeahead-wait-ms = "400">
+						<span class="input-group-addon" style="width:1%;">
+	            		<span class="glyphicon glyphicon-search"></span></span>
+	          		</div>
+	          		<div ng-show="sinResultados && producto">
+			      			<i class="glyphicon glyphicon-remove"></i>Sin resultados
+			    	</div>
+			    	<div ng-show="spinCargando && producto" >
+			      		<i class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></i>
+			    	</div>
+	        	</div>
+	      	</form>
+	    </div>
+	  </div>
+	</div>
+
+										<!-- NavBar Vista para dispositivos moviles -->					
+
+	<div class="navbar navbar-default navbar-fixed-top hidden-md hidden-lg" style="background-color: #e3f2fd"
+		role="navigation">
+   		<div class="container">
+	      	<div class="navbar-header">
+		        <button type="button" class="navbar-toggle"
+		        data-toggle="collapse" data-target=".navbar-collapse">
+			        <span class="sr-only">Toggle navigation</span>
+			        <span class="icon-bar"></span>
+			        <span class="icon-bar"></span>
+			        <span class="icon-bar"></span>
+		        </button>
+		        <a class="navbar-brand " aria-expanded = "true" ui-sref="miapp.home">
+					<img id = "logo" src="../Logo-xs.jpg"
+					alt = "Error al cargar la imagen" >
+				</a>
+	    		
+	    		<form class="navbar-form pull-left" ng-submit = "estadoProductosPorNombre()">
+			        <div class="form-group" style="display:inline;">
+			            <div class="input-group" id = "inputNavBar">
+							<input 
+							class="form-control"
+							type="text" placeholder="Buscar producto..." 
+							ng-model="producto" 
+							uib-typeahead="producto as producto.Nombre for producto in traerProductos($viewValue)" 
+							typeahead-loading="spinCargando" 
+							typeahead-no-results="sinResultados" 
+							typeahead-wait-ms = "400">
+							<span class="input-group-addon" style="width:1%;">
+								<span class="glyphicon glyphicon-search" ng-click = "estadoProductosPorNombre()"></span>
+							</span>
+			            </div>
+			        	<div ng-show="sinResultados && producto">
+		      				<i class="glyphicon glyphicon-remove"></i>Sin resultados
+		    			</div>       
+		    			<div ng-show="spinCargando && producto" >
+			      			<i class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></i>
+			    		</div>         
+			        </div>
+			        
+		        </form>
+		    </div>
+     	
+
+	      	<div class="navbar-collapse collapse" >
+	         	<ul class="nav navbar-nav">
+					<li>
+					  <a  aria-expanded = "false" ui-sref="miapp.registro"><strong>Registrarse</strong></a>
+					</li>
+					<li>
+						<a  aria-expanded = "false" ui-sref="miapp.consultas"><strong>Consultas</strong></a>
+					</li>
+					<li>
+						<a  aria-expanded = "false" ui-sref="miapp.contacto"><strong>Contactanos</strong></a>
+					</li>
+					<li>
+						<a  ng-if= "!varCliente"  aria-expanded = "false" ui-sref="miapp.login">
+							<strong>Ingresar</strong>
+						</a>
+					</li>
+					<li ng-if= "varCliente">
+					    <a class="navbar-brand dropdown-toggle" data-toggle="dropdown">
+					        <span class="glyphicon glyphicon-user"></span>
+					        	{{varCliente.Apellido}}, {{varCliente.Nombre}}
+					        <span class="caret"></span>
+					    </a>
+					    <ul class="dropdown-menu col-xs-12 col-sm-12">
+							<li class = "col-xs-12 col-sm-12">
+						    	<a ui-sref="miapp.carrito">
+						        	<span class="glyphicon glyphicon-shopping-cart"></span>
+						        	Carrito
+						        </a>
+						    </li>
+						    <li class = "col-xs-12 col-sm-12">
+						    	<a ui-sref ="miapp.verDatosCliente">
+						        	<span class="glyphicon glyphicon-list-alt"></span>
+						        	Perfil
+						        </a>
+						    </li>
+						    <li class = "col-xs-12 col-sm-12">
+						    	<a ng-click = "logOut()">
+						        	<span class="glyphicon glyphicon-off"></span> 
+						        	Salir
+						        </a>
+						    </li>
+						    
+						</ul>        
+					</li>    
+				</ul>
+			</div>
+		</div>
+	</div>
+	
+	<br>
+	<br>
+	<br>
+	<br>
+
+	<div class="separador" style="margin:15px 0px 15px 0px;"></div>
+
+									<!-- Fin NavBar Vista para dispositivos moviles -->					
+
+
+											<!-- Beneficios (Ambos Dispositivos)-->
+	<div class="row">
+
+		<div class="col-xs-6 col-sm-3-separado alert alert-info">
+			<FONT size = 3 px><center><p><b>Envios a cualquier parte con previo encargo</b></p></center></FONT>
+		</div>
+
+		<div class="col-xs-6 col-sm-3-separado alert alert-info col-xs-offset-left ">
+			<FONT size = 3 px><center><p><b><a ui-sref ="miapp.como-comprar">Envios a cualquier parte con previo encargo</a></b></p></center></FONT>
+			<!--<a ui-sref ="como-comprar"><FONT Size =3 px ></FONT>
+				<FONT Size =3 px> Como 	comprar?</FONT>
+			</a>-->
+
+		</div>
+		<div class="col-xs-6 col-sm-3-separado alert alert-info col-xs-offset-left">
+			<FONT size=3 px><center><p><b>Compra desde tu casa, oficina o celular</b></p></center></FONT>
+		</div>
+
+		<div class="col-xs-6 col-sm-3-separado alert alert-info col-xs-offset-left">
+			<FONT size=3 px><center><p><b>El mejor precio con la mejor calidad <br></b></p></center></FONT>
+		</div>
+
+	</div>
+
+	<div class="separador" style="margin:0px 0px 15px 0px;"></div>
+
+	<div class = "hidden-xs hidden-sm" id = "scrollM"></div> <!--Scroll al estado en monitores-->
+
+										<!-- Fin fila de beneficios y su container-->
+
+
+
+									<!-- Imagenes con categorias y subcategorias desplegables(monitor) -->
+
+	<div class="container hidden-xs hidden-sm">
+		<div class="row well">
+			<div class="col-md-2" ng-repeat = "rubro in rubros">
+				<div class="dropdown">
+						<button type ="button" style="background: url(../img/logo.jpg);" class="btn btn-primary botonRubro" 
+						data-toggle ="dropdown" aria-haspopup="true" 
+						aria-expanded="false">
+						</button>
+						<p class = "text-center">{{rubro.Rubro}}</p>
+					<ul class="dropdown-menu">
+						<li ng-repeat = "subRubro in rubro.subRubros">
+							<span>
+								<a class = "all-margenTop" ng-click = "traerProductosPorSubRubro(subRubro)">
+							{{subRubro.Nombre}}</a>
+							</span>
+						</li>
+					</ul>
+				</div>			
+			</div>
+		 
+		</div>
+	</div>				
+
+									<!-- Fin Imagenes con categorias y subcategorias desplegables(monitor) -->
+
+									<!-- Imagenes con categorias (no desplegable, dispositivos moviles) -->
+
+	<div class="container hidden-md hidden-lg hidden-xl">
+		<div class="row">
+			<div class="col-xs-6 col-sm-2 text-center" ng-repeat = "rubro in rubros">
+				<button type ="button" class="btn btn-primary botonRubro"  
+					style="background: url(../img/logo.jpg);border-radius : 50%;"
+					ng-click = "estadoListarSubRubro(rubro)">
+				</button>
+				<p><b>{{rubro.Rubro}}</b></p>
+			</div>
+		 
+		</div>
+	</div>	
+									<!-- Fin Imagenes con categorias (no desplegable, dispositivos moviles) -->
+
+	<div id = "scrollD"></div> <!--Scroll al estado en dispositivos Moviles-->									
+
+	<div class = "hidden-md" class="separador" style="margin:15px 0px 15px 0px;"></div>
+
+	<!-- Fin de container -->
+
+</div>

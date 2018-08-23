@@ -1,0 +1,74 @@
+<br>
+<br>
+<br>
+<br>
+
+
+<div class="container well" style="background-color: #e3f2fd">
+
+    <div class="row" id = "scrollTop">
+        <div class="col-xs-12">
+            <h3 class = "text-center">Crear Proveedor</h3>
+        </div>
+    </div>
+
+    <div class="separador" style="margin:15px 0px 15px 0px;border-top-color: #A4A4A4"></div>
+
+	<form class ="form-horizontal" autocomplete="off">
+
+		<div class="form-group">
+			<label for="formGroup" class ="col-xs-12 col-sm-2">Nombre</label>
+			<div class="col-xs-10 col-sm-6">
+				<input type="text" class="form-control" id="formGroup" ng-model = "proveedor.Nombre">
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-2 col-md-2" for="form-group">Telefono</label>
+			<div class="col-xs-10 col-sm-6 col-md-6">
+				<div class="input-group">
+					<input class="form-control" type ="text" ng-model = "proveedor.Telefono"
+					onkeypress='return (event.charCode >= 48 && event.charCode <= 57)'>
+					<span class="input-group-addon"><span class="glyphicon glyphicon-phone"></span></span>
+				</div>
+			</div>				
+		</div>
+
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-2 col-md-2" for="form-group">Correo Electronico*</label>
+			<div class="col-xs-10 col-sm-6 col-md-6">
+				<div class="input-group">
+					<input type="text" class="form-control" ng-model = "proveedor.Mail">
+					<span class="input-group-addon">@</span>
+				</div>
+			</div>
+		</div>	
+
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-2" for="form-group">Saldo</label>
+			<div class="col-xs-6 col-sm-3">
+				<input class="form-control" type ="text" ng-model = "proveedor.Saldo">
+			</div>
+		</div>
+
+		<div class="form-group">
+			<div class="col-xs-12 col-sm-8 col-sm-offset-2">
+				<button class="btn btn-success btn-lg"  
+					ng-disabled = "!proveedor.Nombre"
+					ng-click = "crearProveedor()">
+					<span class="glyphicon glyphicon-ok"></span>  Crear
+				</button>
+			</div>
+		</div>
+
+	</form>
+
+	<div>
+        <alert-message class ="mensajeAlerta" alert="alertMessage" ></alert-message>
+    </div>
+
+    <div ng-show ="cargando"  class="loader">
+        <strong>{{cargando}}</strong>
+    </div>
+
+</div>

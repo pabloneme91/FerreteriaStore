@@ -1,0 +1,46 @@
+<div class="modal-header">
+    <h3 class="text-center modal-title" id="modal-title">Detalle Factura</h3>
+</div>
+
+<div class = "modal-body modal-body-touch">
+
+    <div class = "table-responsive">
+
+        <table ng-table class="table table-bordered table-hover">
+
+            <thead>
+                <tr>
+                    <th class = "text-center">Producto</th>
+                    <th class = "text-center">Precio</th>
+                    <th class = "text-center">Cantidad</th>
+                    <th class = "text-center">Total</th>
+                    </th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr ng-repeat="objeto in auxDetalles">
+                    <td class = "text-center">{{objeto.producto.Nombre}}</td>
+                    <td class = "text-center">${{objeto.Precio | number:2}}</td>
+                    <td class = "text-center">{{objeto.Cantidad}}</td>
+                    <td class = "text-center total-label">${{objeto.Total | number:2}}</td>
+                </tr>
+            </tbody>
+            
+        </table>
+
+    
+
+    </div>
+
+    <div class="separador" style="margin:15px 0px 15px 0px;"></div>
+
+    <div class = "total-input">
+        <label >Total = ${{facturas[indexFactura].Total | number : 2}}</label>
+    </div>
+
+</div>
+
+<div class="modal-footer">
+    <button class="btn btn-warning" type="button" ng-click="cerrarModal()">Cerrar</button>
+</div>

@@ -1,0 +1,59 @@
+<div class="container well" id = "top">
+
+	<div class = "hidden-xs visible-sm visible-md visible-lg" ng-repeat = "producto in productos">
+		<div class="col-xs-6">
+			<img class = "img-responsive" 
+				ng-src= {{producto.Foto}} alt="No se puedo cargar la foto">
+		</div>
+		<div class="col-xs-6">
+			<h2><b>{{producto.Nombre}}</b></h2>
+			<h3><i>{{producto.Descripcion}}</i></h3>
+			<h4><span>${{producto.Precio | number:2}}</span></h4>
+				<div class = "col-xs-12 all-margenLeft">
+					<label class = "col-xs-4 col-sm-4 col-md-3">Cantidad</label>
+					<input class = "col-xs-4 col-sm-2 col-md-2" 
+					type = "number" ng-model = "producto.cantidad"
+					onkeypress='return (event.charCode >= 48 && event.charCode <= 57)'
+					ng-keydown="$event.which === 13 && agregarCarrito($index,producto.cantidad)"> 
+				</div>
+				<button  class="btn btn-success btn-md all-margenTop" ng-click = "agregarCarrito($index,producto.cantidad)" >
+					<span class="glyphicon glyphicon-plus-sign"></span> Agregar
+				</button>
+		</div>
+	</div>
+
+	<div class = "visible-xs" ng-repeat = "producto in productos">
+		<div class="thumbnail text-left">
+			<img class ="img-responsive" 
+				ng-src= {{producto.Foto}} alt="No se puedo cargar la foto"
+				style="margin:inherit;width: 100px,height:100px">
+			<div  class="caption alert-info">
+				<h3>{{producto.Nombre}}</h3>
+				<h4>{{producto.Descripcion}}</h4>
+				<h5><span>${{producto.Precio | number : 2}}</span></h5>
+				<p>
+				<div class = "col-xs-12 all-margenLeft" >
+					<label class = "col-xs-5 col-sm-4 col-md-6 all-margenTop">Cantidad</label>
+					<input class = "col-xs-5 col-sm-4 col-md-5 all-margenTop" 
+						type = "number" ng-model = "producto.cantidad"
+						onkeypress='return (event.charCode >= 48 && event.charCode <= 57)'
+						ng-keydown="$event.which === 13 && agregarCarrito($index,producto.cantidad)"> 
+				</div>
+				<button  class="btn btn-success btn-md all-margenTop" ng-click = "agregarCarrito($index,producto.cantidad)" >
+				<span class="glyphicon glyphicon-plus-sign"></span> Agregar
+				</button>
+				</p>
+			</div>
+		</div>
+	</div>	
+
+
+	<div>
+		<alert-message class ="mensajeAlerta" alert="alertMessage" ></alert-message>
+	</div>
+
+	<div ng-show ="cargando"  class="loader">
+		{{cargando}}
+	</div>
+
+</div>

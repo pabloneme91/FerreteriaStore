@@ -1,0 +1,162 @@
+<style type="text/css" name = "removeInputSpinner"> 
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0; 
+}
+</style>
+
+<br>
+<br>
+<br>
+<br>
+	
+<div class="container well" style="background-color: #e3f2fd">
+
+	<div class="row">
+		<div class="col-xs-12">
+			<h3 class = "text-center">Crear Compra</h3>
+		</div>
+	</div>
+
+	<div class="separador" style="margin:15px 0px 15px 0px;border-top-color: #A4A4A4""></div>
+
+	<form class ="form-horizontal"  autocomplete="off">
+
+		<div class="form-group">
+			<div class = "col-xs-12 col-sm-5 col-md-6">
+				<label for="formGroup" class="col-xs-12 col-sm-3 col-md-4">Producto</label>
+				<input class="col-xs-8 col-sm-8 col-md-8 col-md-pull-1 xs-margenLeft sm-margenLeft typeahead-input" 
+				type="text" ng-model="selectProductos" placeholder="Buscar producto..." 
+				uib-typeahead="producto as producto.Nombre for producto in productos | filter: {'Nombre' : $viewValue}" 
+				ng-change = "changeProducto()"
+				typeahead-on-select="changeProducto()"
+				id = "selectId">
+			</div>
+			<div class = "col-xs-12 col-sm-6 col-md-6">
+				<div class="col-xs-6 margenTop">
+					<button class="btn btn-primary btn-rounded btn-sm" type="button"
+						ng-click = "actualizarProductos()">
+						<span class="glyphicon glyphicon-refresh"></span>  Actualizar Productos
+					</button>
+				</div>
+			</div>
+		</div>
+
+		<br>
+
+		<div class="form-group">
+			<div class="col-xs-12 col-sm-3 col-md-2">
+				<label for="formGroup" class="col-xs-3 col-sm-4 col-md-6">Stock</label>
+				<input type="text" placeholder="0" class="col-xs-5 col-sm-5 col-md-6 xs-margenLeft sm-margenLeft" 
+				ng-model = "selectProductos.Stock" readonly="true" >
+			</div>
+			<div class="col-xs-12 col-sm-4 col-sm-pull-1 col-md-pull-0 col-md-3">
+				<label for="formGroup" class="col-xs-3 col-sm-4 col-md-6 margenTop">Cantidad</label>
+				<input type="text" placeholder="0" class="col-xs-5 col-sm-4 col-md-4 margenTop xs-margenLeft sm-margenLeft" 
+				ng-model = "cantidad" 
+				ng-keydown="$event.which === 13 && agregarLinea()"
+				onkeypress='return event.charCode >= 48 && event.charCode <= 57'
+				ng-disabled = "!selectProductos.PrecioCosto">
+			</div>
+			<div class="col-xs-12 col-sm-4 col-sm-pull-2 col-md-3 col-md-pull-0">
+				<label for="formGroup" class="col-xs-3 col-sm-4 col-md-4 margenTop" >Precio Costo</label>
+				<input type="text" class="col-xs-5 col-sm-6 col-md-6 margenTop xs-margenLeft sm-margenLeft" 
+					ng-model = "precio"
+					ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/"
+					ng-keydown="$event.which === 13 && agregarLinea()"
+            		onkeypress='return (event.charCode >= 48 && event.charCode <= 57) || event.charCode == 46'
+            		ng-disabled = "!selectProductos.PrecioCosto"
+				>
+			</div>
+			<div class ="col-xs-6 col-sm-1 col-sm-pull-2 col-md-4 col-md-pull-0 ">
+				<button class="btn btn-primary btn-rounded btn-sm margenTop xs-margenLeft" 
+					ng-disabled = "!selectProductos.PrecioCosto || !precio" 
+					ng-click = "agregarLinea()">
+					<span class="glyphicon glyphicon-plus-sign"></span> Agregar
+				</button>
+			</div>
+		</div>
+	</form>
+
+	<br>
+
+	<div class = "table-responsive">
+
+		<table ng-table class="table table-bordered table-hover">
+
+			<thead>
+        		<tr ng-hide = "lineas.length === 0">
+	        		<th class = "text-center">Producto</th>
+        			<th class = "text-center">Cantidad</th>
+        			<th class = "text-center">PrecioCosto</th>
+        			<th class = "text-center">Total</th>
+        			<th class = "text-center"></th>
+        		</tr>
+        		<tr ng-hide = "!(lineas.length === 0)"></tr>
+    		</thead>
+
+        	<tbody>
+				<tr ng-hide = "lineas.length === 0" ng-repeat="linea in lineas">
+				    <td class = "text-center">{{linea.Nombre}}</td>
+					<td class = "text-center">{{linea.Cantidad}}</td>
+					<td class = "text-center">${{linea.PrecioCosto | number: 2}}</td>
+					<td class = "text-center total-label">${{linea.Total | number: 2}}</td>
+					<td class = "text-center">
+                		<a ng-click="borrar(lineas, $index)">
+                    		<i class ="glyphicon glyphicon-trash"></i>               
+                		</a>
+            		</td>
+				</tr>
+				<tr ng-hide = "!(lineas.length === 0)">
+					<td class = "text-center">Agregar productos a la compra</td>
+				</tr>
+			</tbody>
+
+		</table>
+
+	</div>
+
+	<br>
+
+	<form class ="form-horizontal">
+		<div class = "form-group">
+			<div class = "col-xs-12 col-sm-5">
+				<label for="formGroup" class="col-xs-4 col-sm-4 control-label">Proveedor</label>
+				<div class="col-xs-8 col-sm-8" id="myselect-container">
+					<select  class="form-control" 
+						onmousedown="if(this.options.length>5){this.size=5;}" onchange='this.size=0;' onblur="this.size=0;"  
+						ng-model = "selectProveedores" 
+						ng-options = "proveedor.Nombre for proveedor in proveedores">
+					</select>
+				</div>
+			</div>
+			<div class = "col-xs-12 col-sm-4">
+				<label for="formGroup" class="col-xs-4 col-sm-4 control-label margenTop">Total</label>
+				<input  type="text" class="col-xs-7 col-sm-8 margenTop xs-margenLeft total-input" 
+				  value = "${{total | number:2}}" readonly="true">
+			</div>					  
+			<div class = "col-xs-6 col-sm-3 margenTop">
+				<button class="btn btn-success btn-rounded margenTop xs-margenLeft" 
+					ng-click = "registrarCompra()" ng-disabled = "!selectProveedores || lineas.length === 0">
+					<span class="glyphicon glyphicon-ok"></span> Registrar Compra
+				</button>
+			</div>
+		</div>
+	</form>
+
+
+
+	<div>
+		<alert-message  class ="mensajeAlerta" alert="alertMessage" ></alert-message>
+	</div>
+	
+	<div ng-show ="cargando"  class="loader">
+		<strong>{{cargando}}</strong>
+	</div>
+
+
+</div>
+	

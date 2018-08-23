@@ -1,0 +1,119 @@
+<div class="container well" style="background-color: #e3f2fd">
+
+	<div ng-show = "sesion">
+
+		<br>
+		<br>
+		<br>
+
+		<form class ="form-horizontal" autocomplete="off" name="consulta_form">
+
+			<div class="form-group">
+				<label class="col-xs-12 col-sm-2" for="fromGroup">Producto</label>
+				<div class="col-xs-11 col-sm-4">
+					<input 
+					class="form-control"
+					type="text" placeholder="Buscar producto..." 
+					ng-model="selectProducto" 
+					ng-blur = "controlProducto()"
+					uib-typeahead="producto as producto.Nombre for producto in traerProductos($viewValue)" 
+					typeahead-loading="spinCargando"
+					typeahead-no-results="sinResultados" 
+					typeahead-wait-ms = "400"
+					required>
+	          		<div ng-show="sinResultados && selectProducto">
+			      			<i class="glyphicon glyphicon-remove"></i>Sin resultados
+			    	</div>
+			    	<div ng-show="spinCargando && selectProducto" >
+			      		<i class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></i>
+			    	</div>										
+			    	<small class="form-text text-muted">*Elegir un producto de la lista que se desplegara</small>
+				</div>
+			</div>
+
+
+			<div class="form-group">
+				<label class="col-xs-12 col-sm-2" for="fromGroup">Descripcion*</label>
+				<div class="col-xs-11 col-sm-4">
+					<textarea rows="4" class="form-control" ng-model = "descripcion" required></textarea>
+				</div>			
+			</div>
+
+			<div class="form-group">
+				<label for="formGroup" class ="col-sm-2">Foto</label>
+				<div class="col-sm-6">
+					<input 
+				    type="file" 
+				    ngf-select 
+				    ng-model="foto" 
+				    name="file" 
+				    accept="image/*"
+				    ngf-pattern="'image/*'"
+				    ngf-max-size="5MB" />
+				    <small class="form-text text-muted">*Peso Maximo: 5MB</small>
+				    <br>
+				    <img style = "width: 100px" ngf-thumbnail="foto"/>
+				    <i ng-show="consulta_form.file.$error.maxSize" style = "color:red">
+				    	<b>*Imagen muy pesada. No se podra enviar</b>
+				    </i>
+				    <i ng-show="consulta_form.file.$error.pattern" style = "color:red">
+				    	<b>*El archivo debe ser una imagen</b>
+				    </i>
+				</div>			
+			</div>
+
+
+			<div class="form-group">
+				<div class = "col-xs-12 col-sm-3 col-md-3 col-sm-offset-2">
+					<div class="g-recaptcha col-md-offset-1" 
+					data-sitekey="6LfS8wcUAAAAAB-wvoGS6UGJxjCI3BlSLI0IlkY8"
+					id = "recaptcha"
+					style = "margin-left: 0">
+					</div>
+				</div>
+				<br>
+				<div class = "col-xs-12 col-sm-5 col-md-4 col-xs-offset-2 col-sm-offset-2 col-md-offset-1">
+					<button type="button" class="btn btn-primary btn-rounded btn-sm" 
+						ng-click = "recargarCaptcha()">
+						<span class="glyphicon glyphicon-refresh"></span>Recargar captcha
+					</button>
+				</div>
+			</div>				
+
+		</form>
+
+		<div class="form-group">
+			<div class="col-sm-2 col-sm-offset-2">
+				<button type="button" class="btn btn-success btn-lg" 
+				ng-disabled = "!descripcion"
+				ng-click = "enviar()">
+				<span class="glyphicon glyphicon-ok"></span> Enviar</button>
+			</div>
+		</div>
+
+		<div>
+			<alert-message class ="mensajeAlerta" alert="alertMessage" ></alert-message>
+		</div>
+
+		<div ng-show ="cargando"  class="loader">
+			{{cargando}}
+		</div>
+
+	</div>
+
+	<div ng-show = "(!sesion)">
+		<h1><p class="text-primary text-center">
+				<a ui-sref = "miapp.login">
+					<b>Debe Loggearse para utilizar esta funcion</b>
+				</a>
+			</p>
+		</h1>
+	</div>	
+
+</div>	
+
+
+<script src='https://www.google.com/recaptcha/api.js'></script>
+
+
+

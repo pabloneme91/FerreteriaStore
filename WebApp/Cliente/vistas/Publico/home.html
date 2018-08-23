@@ -1,0 +1,91 @@
+<div class="container" autoscroll = "false">
+
+	<div class="row">
+		<div class="col-xs-12">
+			<h1><p class="text-primary text-center"><b>OFERTAS</b></p></h1>
+			<br>
+		</div>
+	</div>
+	
+	<div class = "row">
+		<div class="col-xs-12">
+			<div id="myCarousel" class="carousel slide" data-ride="carousel">
+				<ol class="carousel-indicators">
+					<li data-target ="#myCarousel" data-slide-to="0" class="active"></li>
+					<li data-target ="#myCarousel" data-slide-to="1"></li>
+					<li data-target ="#myCarousel" data-slide-to="2"></li>
+					<li data-target ="#myCarousel" data-slide-to="3"></li>
+				</ol>
+
+				<div class="carousel-inner" role="listbox">
+					
+					<div class="item" ng-class="{active:!$index}" ng-repeat = "producto in ofertas">
+						<img align=center src="img/1.jpg" alt="..." class="img-responsive center-block">
+					</div>
+				</div>
+				<a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+					<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+					<span class="sr-only">Anterior</span>
+				</a>
+				<a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+					<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+					<span class="sr-only">Siguiente</span>
+				</a>
+			</div>
+		</div>
+	</div>	
+</div>
+<!-- Fin container de carousell -->
+
+<!-- Container de mas vendidos -->
+<div class="container" >
+	<div class="row">
+		<div class="col-xs-12">
+			<h1><p class="text-primary text-center">Mas <b>Vendidos</b></p></h1>
+			<br>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-xs-12 col-sm-6 col-md-3" ng-repeat = "producto in destacados">
+			<div class="thumbnail text-left">
+				<a ui-sref = "miapp.productoUnico({obj : producto})">
+					<img class ="img-responsive" 
+						style="margin:inherit;width: 155px;height:125px"
+						ng-src= {{producto.Foto}} alt="No se puedo cargar la foto">
+				</a>
+				<div  class="caption alert-info">
+					<div class = "cortarString">
+						<h4>{{producto.Nombre}}</h4>
+					</div>
+					<div class = "cortarString">
+						<h5>{{producto.Descripcion}}</h5>
+					</div>
+					<span>${{producto.Precio | number : 2}}</span>
+					<p>
+					<div class = "col-xs-12 all-margenLeft" >
+						<label class = "col-xs-4 col-sm-4 col-md-7 all-margenTop">Cantidad</label>
+						<input class = "col-xs-4 col-sm-4 col-md-5 all-margenTop" 
+							type = "number" ng-model = "producto.cantidad"
+							onkeypress='return (event.charCode >= 48 && event.charCode <= 57)'
+							ng-keydown="$event.which === 13 && agregarCarrito($index,producto.cantidad)"> 
+					</div>
+					<button  class="btn btn-success btn-md all-margenTop" ng-click = "agregarCarrito($index,producto.cantidad)" >
+					<span class="glyphicon glyphicon-plus-sign"></span> Agregar
+					</button>
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>	
+
+	<div ng-show ="cargando"  class="loader">
+		{{cargando}}
+	</div>
+
+	<div>
+		<alert-message class ="mensajeAlerta" alert="alertMessage" ></alert-message>
+	</div>
+
+</div>
+

@@ -1,0 +1,222 @@
+<br>
+<br>
+<br>
+<br>
+
+
+<div class="container well" style="background-color: #e3f2fd">
+
+    <div class="row">
+        <div class="col-xs-12">
+            <h3 class = "text-center">Ver Ventas</h3>
+        </div>
+    </div>
+
+    <div class="separador" style="margin:15px 0px 15px 0px;border-top-color: #A4A4A4""></div>
+
+    <form class ="form-horizontal" autocomplete="off">
+        <div class="form-group">
+            <label for="formGroup" class="col-xs-12 col-sm-1 control-label">Codigo</label>
+            <div class="col-xs-8 col-sm-4">
+                <input class="form-control" type= "text" ng-model="codigo" placeholder="Codigo de la factura.."
+                onkeypress='return (event.charCode >= 48 && event.charCode <= 57) || event.charCode == 46'>
+            </div>        
+            <div class="col-xs-3">
+                <button class="btn btn-primary btn-rounded btn-sm" ng-disabled = "!codigo" 
+                    ng-click = "btnTraerFacturaPorId()">
+                    <span class="glyphicon glyphicon-search"></span>  Buscar
+                </button>    
+            </div>
+        </div>
+    </form>
+
+    <br>
+
+	<div class="row">
+        <div class = "col-xs-12 col-sm-1 col-md-1">
+            <label>Desde</label>    
+        </div>
+        <div class="col-xs-10 col-sm-4 col-md-4">
+            <p class="input-group">
+                <input type="text" class="form-control" uib-datepicker-popup="dd-MM-yyyy" ng-model="fechaDesde" is-open="desde.opened" 
+                datepicker-options="opcionesDesde" show-button-bar = "false" 
+                ng-required="true" ng-readonly = "true"/>
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" ng-click="mostrarCalendarioDesde()">
+                    <i class="glyphicon glyphicon-calendar"></i></button>
+                </span>
+            </p>
+        </div>
+
+        <div class = "col-xs-12 col-sm-1 col-md-1">
+            <label>Hasta</label>    
+        </div>
+        <div class="col-xs-10 col-sm-4 col-md-4">
+            <p class="input-group">
+                <input type="text" class="form-control" uib-datepicker-popup="dd-MM-yyyy" ng-model="fechaHasta" is-open="hasta.opened" 
+                datepicker-options="opcionesHasta" show-button-bar = "false" ng-required="true" ng-readonly = "true">
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" ng-click="mostrarCalendarioHasta()">
+                    <i class="glyphicon glyphicon-calendar"></i></button>
+                </span>
+            </p>
+        </div>
+        <div class="col-xs-3 col-sm-2 col-md-2">
+            <button class="btn btn-primary btn-rounded btn-sm" 
+                ng-click = "btnTraerFacturas()">
+                <span class="glyphicon glyphicon-search"></span>  Buscar
+            </button>    
+        </div>
+    </div>   
+
+
+	<br>
+
+    <div class = "row">
+        <div class = "col-md-4">
+          <label>Filtrar Por:</label>
+        </div>
+    </div>
+	   
+    <br>
+
+    <div class = "row">
+        <div class = "col-sm-5 col-md-5">
+            <div class = "col-sm-3 col-md-2">
+    		  <label>Fecha: </label>
+            </div>
+            <div class = "col-sm-1 col-md-3">
+              <input ng-model="search.Fecha">
+            </div>
+        </div>        
+        <div class = "col-sm-5 col-md-5">
+            <div class = "col-sm-3 col-md-2">
+    		  <label>Total: </label>
+            </div>
+            <div class = "col-sm-3 col-md-3">
+                <input ng-model="inputTotal" 
+                onkeypress='return (event.charCode >= 48 && event.charCode <= 57)' 
+                required>
+            </div>
+        </div>    
+            
+    </div>
+
+    <br>
+
+    <div class = "row">
+        <div class = "col-sm-5 col-md-5" id = "scrollTabla">
+            <div class = "col-xs-12 col-sm-3 col-md-2">
+                <label>Cliente: </label>
+            </div>
+            <div class = "col-sm-3 col-md-3">
+                <input ng-model="search.cliente.Nombre" required>
+            </div>
+        </div>
+        <div class = "col-sm-5 col-md-5">
+            <div class = "col-xs-8 col-sm-3 col-md-2 margenTop">
+              <label>Estado: </label>
+            </div>
+            <div class = "col-xs-6 col-sm-6 col-md-7">
+                <select class = "form-control" ng-model = "search.Estado">
+                    <option value = "{{'P'}}">Pagado</option>
+                    <option value = "{{'CC'}}">Cuenta Corriente</option>
+                    <option value = "{{undefined}}">Todas</option>
+                </select>
+            </div>
+        </div>   
+    </div>
+    <div class = "row">
+        <div class = "col-sm-5 col-md-5">
+            <div class = "col-xs-8 col-sm-3 col-md-2 margenTop">
+              <label>Tipo: </label>
+            </div>
+            <div class = "col-xs-6 col-sm-6 col-md-5">
+                <select class = "form-control" ng-model = "search.Tipo">
+                    <option value = "{{'L'}}">Local</option>
+                    <option value = "{{'O'}}">Online</option>
+                    <option value = "{{undefined}}">Todas</option>
+                </select>
+            </div>
+        </div>   
+    </div>
+
+    <br>
+    <br>
+
+    <div class = "row">
+        <div class = "col-xs-12 col-sm-12 col-sm-offset-6 col-md-4 col-md-offset-8">
+                <label class = "col-xs-4 col-sm-2 col-md-6">Total Facturas:</label>    
+                <input type = "text" class = "col-xs-5 col-sm-3 col-md-6 total-input" 
+                value ="${{(sumarFacturas() | number:2) || 0 | number:2}}" disabled>    
+        </div>
+    </div>
+
+    <br>
+    
+    <div class = "table-responsive">
+
+		<table ng-table class="table table-bordered table-hover">
+
+			<thead>
+        		<tr ng-hide = "!facturas || facturas.length === 0">
+        			<th class = "text-center">Codigo</th>
+        			<th class = "text-center">Fecha</th>
+                    <th class = "text-center">Tipo</th>
+        			<th class = "text-center">Total</th>
+        			<th class = "text-center">Estado</th>
+        			<th class = "text-center">Cliente</th>
+                    <th class = "text-center"></th>
+                    <th class = "text-center"></th>
+        		</tr>
+                <tr ng-hide = "facturas.length > 0"></tr>
+    		</thead>
+
+        	<tbody>
+                <tr ng-hide = "!facturas || facturas.length === 0" 
+                    ng-repeat="factura in (filtroFacturas = (facturas | filter:search:strict | filtroTotal: inputTotal))">
+					<td class = "text-center">{{factura.idFactura}}</td>
+				    <td class = "text-center">{{factura.Fecha}}</td>
+                    <td class = "text-center">{{factura.Tipo}}</td>
+				    <td class = "text-center total-label">${{factura.Total | number:2}}</td>
+                    <td ng-model ="estado" class = "text-center">{{factura.Estado === 'P' ? 'Pagado' : 'Cuenta Corriente'}}</td>
+                    <td ng-if = "factura.cliente === null">{{factura.cliente.Nombre = 'S/C'}}</td>
+                    <td ng-if = "!(factura.cliente === null)">{{factura.cliente.Nombre}}</td>
+                    <td class = "text-center">
+                        <a ng-click="ver(factura.idFactura,$index)">
+                            <i class ="glyphicon glyphicon-search"></i>
+                        </a>
+                    </td>
+					<td class = "text-center">
+                        <a ng-hide = "factura.cliente"
+                            ng-click="borrarFactura(factura.idFactura,$index)">
+                            <i class ="glyphicon glyphicon-trash"></i>               
+                        </a>
+                        <a ng-hide = "!factura.cliente"
+                            ng-click = "modalInfo()">
+                            <i class ="glyphicon glyphicon-info-sign"></i>               
+                        </a>
+                    </td>
+				</tr>
+                <tr ng-hide = "facturas.length > 0">
+                    <td class = "text-center">Lista de facturas</td>
+                </tr>
+			</tbody>
+            
+		</table>
+
+    </div>
+
+    <div ng-if ="((facturas) && (facturas.length < limite))">
+        <td><a href = "" ng-click="cargarMas()">Cargar Más</a></td>
+    </div>
+
+</div>
+
+<div>
+    <alert-message class ="mensajeAlerta" alert="alertMessage" ></alert-message>
+</div>
+
+<div ng-show ="cargando"  class="loader">
+    {{cargando}}
+</div>

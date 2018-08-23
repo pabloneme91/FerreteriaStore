@@ -1,0 +1,153 @@
+<br>
+<br>
+<br>
+<br>
+
+
+<div class="container well" style="background-color: #e3f2fd">
+
+    <div class="row" id = "scrollTop">
+        <div class="col-xs-12">
+            <h3 class = "text-center">Crear Producto</h3>
+        </div>
+    </div>
+
+    <div class="separador" style="margin:15px 0px 15px 0px;border-top-color: #A4A4A4"></div>
+
+	<form class ="form-horizontal" autocomplete="off">
+
+		<div class="form-group">
+			<label for="formGroup" class ="col-sm-2">Nombre Producto*</label>
+			<div class="col-sm-6">
+				<input type="text" class="form-control" id="formGroup" placeholder="Nombre de Producto" 
+				ng-model = "producto.Nombre">
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label for="formGroup" class ="col-sm-2">Precio Venta*</label>
+			<div class="col-sm-6">
+				<input type="text" class="form-control" id="formGroup" placeholder="0.00"
+				ng-model = "producto.Precio"
+				onkeypress='return (event.charCode >= 48 && event.charCode <= 57) || event.charCode == 46'>
+			</div>			
+		</div>
+
+		<div class="form-group">
+			<label for="formGroup" class ="col-sm-2">Precio Costo*</label>
+			<div class="col-sm-6">
+				<input type="text" class="form-control" id="formGroup" placeholder="0,00"
+				ng-model = "producto.PrecioCosto"
+				onkeypress='return (event.charCode >= 48 && event.charCode <= 57) || event.charCode == 46'>
+			</div>			
+		</div>
+
+
+		<div class="form-group">
+			<label for="formGroup" class ="col-sm-2">Stock</label>
+			<div class="col-sm-6">
+				<input type="text" class="form-control" id="formGroup" placeholder="0"
+				ng-model = "producto.Stock"
+				onkeypress='return (event.charCode >= 48 && event.charCode <= 57)'>
+			</div>			
+		</div>
+
+		<div class="form-group">
+			<label for="formGroup" class ="col-sm-2">Descripcion</label>
+			<div class="col-sm-6">
+				<textarea rows="4" class="form-control" ng-model = "producto.Descripcion"></textarea>
+			</div>			
+		</div>
+
+		<div ng-controller = "controlRubro">
+
+		<div class="form-group" >
+			<label for="formGroup" class ="col-sm-2">Rubro*</label>
+			<div class="col-sm-6">
+				<select class="form-control" ng-model ="$parent.selectRubros"  ng-options = "rubro.Rubro for rubro in rubros"
+				ng-change = "change(selectRubros.subRubros)">
+				</select>
+					
+			</div>			
+		</div>
+
+
+		<div class="form-group">
+			<label for="formGroup" class ="col-sm-2">SubRubro*</label>
+				<div class="col-sm-6">
+					<select class="form-control" ng-model ="$parent.selectSubRubros" 
+					ng-options = "subRubro.Nombre for subRubro in subRubros">
+					</select>
+						
+				</div>			
+			</div>
+		</div>
+
+		<div class="form-group" >
+			<label for="formGroup" class ="col-sm-2">Destacado</label>
+			<div class="col-sm-2">
+				<select class = "form-control" ng-model = "producto.Destacado">
+                    <option value = "{{1}}">Si</option>
+                    <option value = "{{0}}" selected>No</option>
+                </select>
+			</div>			
+		</div>
+
+		<div class="form-group" >
+			<label for="formGroup" class ="col-sm-2">Oferta</label>
+			<div class="col-sm-2">
+				<select class = "form-control" ng-model = "producto.Oferta">
+                    <option value = "{{1}}">Si</option>
+                    <option value = "{{0}}" selected>No</option>
+                </select>
+			</div>			
+		</div>		
+
+		<div class="form-group">
+			<label for="formGroup" class ="col-sm-2">Foto*</label>
+			<div class="col-sm-6">
+				<input 
+			    type="file" 
+			    ngf-select 
+			    ng-model="producto.Foto" 
+			    name="file" 
+			    accept="image/*"
+			    ngf-pattern="'image/*'"
+			    ngf-max-size="5MB" />
+			    <small class="form-text text-muted">*Peso Maximo: 5MB</small>
+			    <br>
+			    <img style = "width: 100px" ngf-thumbnail="producto.Foto"/>
+			    <i ng-show="consulta_form.file.$error.maxSize" style = "color:red">
+			    	<b>*Imagen muy pesada. No se podra enviarla</b>
+			    </i>
+			    <i ng-show="consulta_form.file.$error.pattern" style = "color:red">
+			    	<b>*El archivo debe ser una imagen</b>
+			    </i>
+			</div>			
+		</div>		
+
+
+		<br>
+
+		<div class="form-group">
+			<div class="col-xs-12 col-sm-8 col-sm-offset-2">
+				<button class="btn btn-success btn-lg"  
+					ng-disabled = "!(producto.Nombre && producto.Precio && producto.PrecioCosto
+					 && producto.Foto && selectSubRubros )" 
+					ng-click = "crearProducto(selectSubRubros)">
+					<span class="glyphicon glyphicon-ok"></span>  Crear
+				</button>
+			</div>
+		</div>
+
+	</form>
+
+    <div>
+        <alert-message class ="mensajeAlerta" alert="alertMessage" ></alert-message>
+    </div>
+
+    <div ng-show ="cargando"  class="loader">
+        <strong>{{cargando}}</strong>
+    </div>
+
+</div>

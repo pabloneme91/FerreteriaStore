@@ -1,0 +1,68 @@
+<div class="modal-header">
+    <h3 class="text-center modal-title" id="modal-title">Detalle Factura</h3>
+</div>
+<div class = "modal-body modal-body-touch">
+
+    <div class = "table-responsive">
+
+        <table ng-table class="table table-bordered table-hover">
+
+            <thead>
+                <tr>
+                    <th class = "text-center">Producto</th>
+                    <th class = "text-center">Precio</th>
+                    <th class = "text-center">Cantidad</th>
+                    <th class = "text-center">Total</th>
+                    <th class = "text-center"
+                        ng-hide = "vista === 'verProductos'"></th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr ng-repeat="objeto in auxDetalles">
+                    <td class = "text-center">{{objeto.producto.Nombre}}</td>
+                    <td class = "text-center">${{objeto.Precio | number:2}}</td>
+                    <td class = "text-center">{{objeto.Cantidad}}</td>
+                    <td class = "text-center total-label">${{objeto.Total | number:2}}</td>
+                    <td class = "text-center" ng-hide = "vista === 'verProductos'">
+                        <a  ng-hide = "(vista === 'verVentas' && facturas[indexFactura].cliente) || 
+                            (vista === 'cuentaCliente' && facturas[indexFactura].Estado === 'P') ||
+                            (vista === 'verPagosClientes') ||
+                            (vista === 'verProductos')" 
+                            ng-click = "borrarProducto(objeto.idDetalles,objeto.idFactura,$index)">
+                            <i class ="glyphicon glyphicon-trash"></i>               
+                        </a>
+                        <a 
+                            ng-hide = "!((vista === 'verVentas' && facturas[indexFactura].cliente) || 
+                            (vista === 'cuentaCliente' && facturas[indexFactura].Estado === 'P')  ||
+                            (vista === 'verPagosClientes') ||
+                            (vista === 'verProductos'))" 
+                            ng-click = "modalInfo()">
+                            <i class ="glyphicon glyphicon-info-sign"></i>               
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+            
+        </table>
+
+    
+
+    </div>
+
+    <div class="separador" style="margin:15px 0px 15px 0px;"></div>
+
+    <div class = "total-input">
+        <label ng-show = "vista === 'verVentas' || vista === 'cuentaCliente' || vista === 'verPagosClientes'">
+        Total = ${{facturas[indexFactura].Total | number : 2}}</label>
+    </div>
+
+</div>
+
+<div class="modal-footer">
+    <button class="btn btn-warning" type="button" ng-click="cerrarModal()">Cerrar</button>
+</div>
+
+<div ng-show ="cargando"  class="loader">
+    <strong>{{cargando}}</strong>
+</div>

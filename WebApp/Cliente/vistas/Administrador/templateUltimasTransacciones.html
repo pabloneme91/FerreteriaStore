@@ -1,0 +1,59 @@
+<div class="modal-header">
+    <h3 class="text-center modal-title" id="modal-title">Ultimas {{transaccion}}</h3>
+</div>
+
+<div class = "modal-body">
+
+    <div class = "table-responsive">
+
+        <table ng-table class="table table-bordered table-hover">
+
+            <thead>
+                <tr ng-hide = "!facturas || facturas.length === 0">
+                    <th class="text-center">Codigo</th>
+                    <th class="text-center">Fecha</th>
+                    <th class="text-center">Cliente</th>
+                    <th class="text-center"></th>
+                </tr>
+                <tr ng-hide = "facturas.length > 0"></tr>
+            </thead>
+
+            <tbody>
+                <tr ng-hide = "!facturas || facturas.length === 0"  
+                    ng-repeat="factura in facturas">
+                    <td class="text-center" ng-if = "transaccion === 'Ventas'">{{factura.idFactura}}</td>
+                    <td class="text-center" ng-if = "transaccion === 'Compras'">{{factura.idCompras}}</td>
+                    <td class="text-center">{{factura.Fecha}}</td>
+                    <td class="text-center" ng-if = "transaccion === 'Ventas'">{{factura.cliente.Nombre || "S/C"}}</td>
+                    <td class="text-center" ng-if = "transaccion === 'Compras'">{{factura.proveedor.Nombre}}</td>
+                    <td class="text-center" ng-if = "transaccion === 'Ventas'">
+                        <a  ng-click="verDetalle(factura.idFactura,$index)">
+                            <i class ="glyphicon glyphicon-search"></i>               
+                        </a>
+                    </td>
+                    <td class="text-center" ng-if = "transaccion === 'Compras'">
+                        <a  ng-click="verLineasCompras(factura.idCompras,$index)">
+                            <i class ="glyphicon glyphicon-search"></i>               
+                        </a>
+                    </td>
+                </tr>
+                <tr ng-hide = "facturas.length > 0">
+                    <td class="text-center" ng-if = "transaccion === 'Ventas'">No se registraron ventas con este producto</td>
+                    <td class="text-center" ng-if = "transaccion === 'Compras'">No se registraron compras con este producto</td>
+                </tr>
+            </tbody>
+            
+        </table>
+            
+    </div>
+
+</div>
+
+<div class="modal-footer">
+    <button class="btn btn-warning" type="button" ng-click="cerrarModal()">Cerrar</button>
+</div>
+
+
+<div ng-show ="cargando"  class="loader">
+    <strong>{{cargando}}</strong>
+</div>

@@ -1,0 +1,118 @@
+<style type="text/css">
+	  .datepicker-noclear [ng-click="select(null)"] {
+      display: none;
+    } 
+</style>
+
+
+<div class="container well" style="background-color: #e3f2fd">
+	
+	<br>
+	<br>
+	<br>
+	<form class ="form-horizontal" autocomplete="off">
+		
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-2" for="fromGroup">Nombre*</label>
+			<div class="col-xs-10 col-sm-5">
+				<input class="form-control" type ="text"  placeholder="Nombre" ng-model = "cliente.Nombre">
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-2" for="fromGroup">Apellido*</label>
+			<div class="col-xs-10 col-sm-5">
+				<input class="form-control" type ="text" placeholder="Apellido" ng-model = "cliente.Apellido">
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-2" for="fromGroup">Fecha de Nacimiento*</label>
+			<div class="col-xs-10 col-sm-5">
+	            <p class="input-group">
+	                <input type="text" class="form-control" uib-datepicker-popup="dd-MM-yyyy" ng-model="fecha" is-open="fecha.opened" 
+	                datepicker-options="opcionesFecha" show-button-bar = "false"
+	                ng-required="true" clear-text ="Close" 
+	                ng-readonly = "true"/>
+	                <span class="input-group-btn">
+	                    <button type="button" class="btn btn-default" ng-click="mostrarCalendario()">
+	                    <i class="glyphicon glyphicon-calendar"></i></button>
+	                </span>
+	            </p>
+        	</div>	
+		</div>
+
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-2" for="fromGroup">DNI*</label>
+			<div class="col-xs-10 col-sm-5">
+				<input class="form-control" type ="number" placeholder="DNI" ng-model = "cliente.Documento">
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-2" for="fromGroup">Telefono</label>
+			<div class="col-xs-10 col-sm-5">
+				<div class = "input-group">
+				<input class="form-control" type ="text" placeholder="Telefono fijo o celular" ng-model = "cliente.Telefono">
+				<span class="input-group-addon"><span class="glyphicon glyphicon-phone"></span></span>
+				</div>
+			</div>					
+		</div>
+
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-2" for="form-group">Mail*</label>
+			<div class="col-xs-10 col-sm-5">
+				<div class="input-group">
+					<input type="text" class="form-control" ng-model = "cliente.Mail" placeholder="usuario@ejemplo.com">
+					<span class="input-group-addon">@</span>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-2" for="fromGroup">Contraseña*</label>
+			<div class="col-xs-10 col-sm-5">
+				<input class="form-control" type ="password" placeholder="Contraseña" ng-model = "cliente.Contrasenia">
+			</div>
+		</div>
+
+		<br/>
+
+		<div class="form-group">
+			<div class = "col-xs-12 col-sm-3 col-md-3 col-sm-offset-2">
+				<div class="g-recaptcha col-md-offset-1" 
+				data-sitekey="6LfS8wcUAAAAAB-wvoGS6UGJxjCI3BlSLI0IlkY8"
+				id = "recaptcha"
+				style = "margin-left: 0">
+				</div>
+			</div>
+			<br>
+			<div class = "col-xs-12 col-sm-5 col-md-4 col-xs-offset-2 col-sm-offset-2 col-md-offset-1">
+				<button type="button" class="btn btn-primary btn-rounded btn-sm" 
+					ng-click = "recargarCaptcha()">
+					<span class="glyphicon glyphicon-refresh"></span>Recargar captcha
+				</button>
+			</div>
+		</div>		
+
+		<br>
+
+		<div class="form-group">
+			<div class="col-xs-6 col-sm-offset-2">
+				<button type="button" class="btn btn-success btn-lg" ng-click = "registrarse()"><span class="glyphicon glyphicon-floppy-saved" ></span>Registrarse</button>
+			</div>
+		</div>
+
+	</form>
+	<div>
+		<alert-message class ="mensajeAlerta" alert="alertMessage" ></alert-message>
+	</div>
+	
+	<div ng-show ="cargando"  class="loader">
+		{{cargando}}
+	</div>
+
+</div>
+
+<script src='https://www.google.com/recaptcha/api.js'></script>

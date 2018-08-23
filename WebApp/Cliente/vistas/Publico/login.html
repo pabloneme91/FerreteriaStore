@@ -1,0 +1,42 @@
+<div class="container" autocomplete = "off" >
+	<br>
+	<br>
+	<br>
+	<div class="row">
+		<div class="col-xs-12 col-sm-5 alert alert-success">
+			<FONT color="blue" size=4><p class="text-center"><u>Ingresar como usuario</u></p></FONT>
+			<form >
+			<label for="email"><FONT color="blue" size=4>Documento</FONT></label>
+			<input type="text" class="form-control" placeholder="Documento" ng-model= "usuario.Documento">
+			<br>
+			<label for="password"><FONT color="blue" size=4>Contraseña</FONT></label>
+			<input type="password" class="form-control" placeholder="Ingrese contraseña" ng-model= "usuario.Contrasenia">
+			<br>
+			<button class="btn btn-primary btn-lg button-bajable" ng-click = "loginCliente()">Ingresar</button>
+			</form>
+		</div>
+	
+		<div class="col-xs-12 col-sm-5 col-sm-offset-2 alert alert-success">
+			<FONT color="blue" size=4><p class="text-center"><u>Recuperar Contraseña</u></p></FONT>
+			<form>
+				<label for="email"><FONT color="blue" size=4>Documento</FONT></label>
+				<input type="text" ng-model = "txtDocumento" class="form-control" placeholder="Documento">
+				<br>
+				<div class="g-recaptcha" id = "recaptcha" 
+				data-sitekey="6LfS8wcUAAAAAB-wvoGS6UGJxjCI3BlSLI0IlkY8"></div>
+				<br>
+				<button class="btn btn-primary btn-lg button-bajable" ng-click = "recuperarContrasenia()">Recuperar</button>
+				<p class="help-block margen-boton">Se le enviara un mail al correo que registro con la contraseña.</p>
+			</form>
+		</div>
+	</div>
+	<div>
+	<alert-message class ="mensajeAlerta" alert="alertMessage" ></alert-message>
+	</div>
+	<div ng-show ="cargando"  class="loader">
+		{{cargando}}
+	</div>
+</div>
+
+<script src='https://www.google.com/recaptcha/api.js'></script>
+

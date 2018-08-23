@@ -1,0 +1,16 @@
+limpiar campo ng-repeat*
+
+enviar foto
+manejo de errores(ejemplo traerCarritoCliente)
+directiva de mensaje de alerta
+limitar consultas en admin
+tablas(filtro)
+sesion permanente con cookies desde admin
+rutas estaticas para admin
+
+
+IONIC : 
+Ingreso con login, guardar usuario.
+guardar datos en la app sin internet
+typeahead
+

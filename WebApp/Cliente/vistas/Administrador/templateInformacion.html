@@ -1,0 +1,22 @@
+<div class="modal-header">
+    <div class="alert alert-info" style="margin-bottom:0px">
+        <h3 class="modal-title text-center" id="modal-title"><strong>Informacion</strong>
+    </div>    
+</div>
+
+<div class="modal-body" style="padding:0px"> 
+    <div class="alert alert-info" style="margin-bottom:0px">
+    <p class="text-justify"><b>{{infoMensaje}}</b></p>
+    <p ng-if = "infoVista">
+        <a class = "total-label" ui-sref = "{{infoRutaDestino}}">&nbsp;&nbsp;Ir a {{infoVista}}
+            <span class = "glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
+        </a>
+    </p>
+    </div>
+</div>
+
+<div class="modal-footer">
+    <button class="btn btn-warning" type="button" ng-click="cerrarModal()">Cerrar</button>
+</div>
+
+
